@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "TwinLand": {
+      "commandName": "Executable",
+      "executablePath": "/Applications/Rhino 7.app/Contents/MacOS/Rhinoceros",
+      "commandLineArgs": "-nosplash -runscript=_Grasshopper"
+    }
+  }
+}

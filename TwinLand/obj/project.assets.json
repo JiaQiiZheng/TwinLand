@@ -1,0 +1,878 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.8": {
+      "GDAL/2.4.4": {
+        "type": "package",
+        "compile": {
+          "lib/net40/gdal_csharp.dll": {},
+          "lib/net40/gdalconst_csharp.dll": {},
+          "lib/net40/ogr_csharp.dll": {},
+          "lib/net40/osr_csharp.dll": {}
+        },
+        "runtime": {
+          "lib/net40/gdal_csharp.dll": {},
+          "lib/net40/gdalconst_csharp.dll": {},
+          "lib/net40/ogr_csharp.dll": {},
+          "lib/net40/osr_csharp.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/cs/any/GdalConfiguration.cs.pp": {
+            "buildAction": "Compile",
+            "codeLanguage": "cs",
+            "copyToOutput": false,
+            "ppOutputPath": "GdalConfiguration.cs"
+          },
+          "contentFiles/vb/any/GdalConfiguration.vb.pp": {
+            "buildAction": "Compile",
+            "codeLanguage": "vb",
+            "copyToOutput": false,
+            "ppOutputPath": "GdalConfiguration.vb"
+          }
+        }
+      },
+      "GDAL.Native/2.4.4": {
+        "type": "package",
+        "dependencies": {
+          "GDAL": "2.4.4"
+        },
+        "build": {
+          "build/net40/GDAL.Native.targets": {}
+        }
+      },
+      "GDAL.Plugins/2.4.4": {
+        "type": "package",
+        "dependencies": {
+          "GDAL.Native": "2.4.4"
+        },
+        "build": {
+          "build/net40/GDAL.Plugins.targets": {}
+        }
+      },
+      "Grasshopper/6.32.20340.21001": {
+        "type": "package",
+        "dependencies": {
+          "RhinoCommon": "[6.32.20340.21001]"
+        },
+        "compile": {
+          "lib/net45/GH_IO.dll": {
+            "related": ".XML"
+          },
+          "lib/net45/Grasshopper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/_._": {
+            "related": ".XML"
+          }
+        },
+        "build": {
+          "build/net45/Grasshopper.targets": {}
+        }
+      },
+      "Newtonsoft.Json/12.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "RhinoCommon/6.32.20340.21001": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Eto.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/Rhino.UI.dll": {},
+          "lib/net45/RhinoCommon.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net45/_._": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/net45/RhinoCommon.targets": {}
+        }
+      },
+      "System.Buffers/4.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net45/System.Buffers.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net461/System.Buffers.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Memory/4.5.5": {
+        "type": "package",
+        "dependencies": {
+          "System.Buffers": "4.5.1",
+          "System.Numerics.Vectors": "4.5.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.3"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/net461/System.Memory.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net461/System.Memory.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Numerics.Vectors/4.5.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Numerics",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net46/System.Numerics.Vectors.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net46/System.Numerics.Vectors.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Resources.Extensions/8.0.0-preview.7.23375.6": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.5"
+        },
+        "compile": {
+          "lib/net462/System.Resources.Extensions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net462/System.Resources.Extensions.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net462/System.Resources.Extensions.targets": {}
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/4.5.3": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net461/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.ValueTuple/4.5.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net47/System.ValueTuple.dll": {}
+        },
+        "runtime": {
+          "lib/net47/System.ValueTuple.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Unofficial.laszip.net/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net4/laszip.net.dll": {}
+        },
+        "runtime": {
+          "lib/net4/laszip.net.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GDAL/2.4.4": {
+      "sha512": "dEuqkL/9oJk4g76LyQKW5x7qPzA9bzoy6F2Q4OIT6GirXxFBR2dmomBFS8Ml+VdD7y3wzEUU7YegG0GjfUwNjg==",
+      "type": "package",
+      "path": "gdal/2.4.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/GdalConfiguration.cs.pp",
+        "content/GdalConfiguration.vb.pp",
+        "contentFiles/cs/any/GdalConfiguration.cs.pp",
+        "contentFiles/vb/any/GdalConfiguration.vb.pp",
+        "gdal.2.4.4.nupkg.sha512",
+        "gdal.nuspec",
+        "lib/net40/gdal_csharp.dll",
+        "lib/net40/gdalconst_csharp.dll",
+        "lib/net40/ogr_csharp.dll",
+        "lib/net40/osr_csharp.dll"
+      ]
+    },
+    "GDAL.Native/2.4.4": {
+      "sha512": "XhvVKd4TU7+8cNiR20YyaLF8CbF5TKChQE0zXPfysj3GMMpnPcdHN2x7DPXF7HodpSm58CYTyqH+cmTgr1yqMg==",
+      "type": "package",
+      "path": "gdal.native/2.4.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/gdal/GDALLicense.rtf",
+        "build/gdal/GISInternalsLicense.rtf",
+        "build/gdal/data/GDALLogoBW.svg",
+        "build/gdal/data/GDALLogoColor.svg",
+        "build/gdal/data/GDALLogoGS.svg",
+        "build/gdal/data/bag_template.xml",
+        "build/gdal/data/compdcs.csv",
+        "build/gdal/data/coordinate_axis.csv",
+        "build/gdal/data/cubewerx_extra.wkt",
+        "build/gdal/data/datum_shift.csv",
+        "build/gdal/data/default.rsc",
+        "build/gdal/data/ecw_cs.wkt",
+        "build/gdal/data/eedaconf.json",
+        "build/gdal/data/ellipsoid.csv",
+        "build/gdal/data/epsg.wkt",
+        "build/gdal/data/esri_StatePlane_extra.wkt",
+        "build/gdal/data/esri_Wisconsin_extra.wkt",
+        "build/gdal/data/esri_epsg.wkt",
+        "build/gdal/data/esri_extra.wkt",
+        "build/gdal/data/gcs.csv",
+        "build/gdal/data/gcs.override.csv",
+        "build/gdal/data/gdal_datum.csv",
+        "build/gdal/data/gdalicon.png",
+        "build/gdal/data/gdalvrt.xsd",
+        "build/gdal/data/geoccs.csv",
+        "build/gdal/data/gml_registry.xml",
+        "build/gdal/data/gmlasconf.xml",
+        "build/gdal/data/gmlasconf.xsd",
+        "build/gdal/data/gt_datum.csv",
+        "build/gdal/data/gt_ellips.csv",
+        "build/gdal/data/header.dxf",
+        "build/gdal/data/inspire_cp_BasicPropertyUnit.gfs",
+        "build/gdal/data/inspire_cp_CadastralBoundary.gfs",
+        "build/gdal/data/inspire_cp_CadastralParcel.gfs",
+        "build/gdal/data/inspire_cp_CadastralZoning.gfs",
+        "build/gdal/data/jpfgdgml_AdmArea.gfs",
+        "build/gdal/data/jpfgdgml_AdmBdry.gfs",
+        "build/gdal/data/jpfgdgml_AdmPt.gfs",
+        "build/gdal/data/jpfgdgml_BldA.gfs",
+        "build/gdal/data/jpfgdgml_BldL.gfs",
+        "build/gdal/data/jpfgdgml_Cntr.gfs",
+        "build/gdal/data/jpfgdgml_CommBdry.gfs",
+        "build/gdal/data/jpfgdgml_CommPt.gfs",
+        "build/gdal/data/jpfgdgml_Cstline.gfs",
+        "build/gdal/data/jpfgdgml_ElevPt.gfs",
+        "build/gdal/data/jpfgdgml_GCP.gfs",
+        "build/gdal/data/jpfgdgml_LeveeEdge.gfs",
+        "build/gdal/data/jpfgdgml_RailCL.gfs",
+        "build/gdal/data/jpfgdgml_RdASL.gfs",
+        "build/gdal/data/jpfgdgml_RdArea.gfs",
+        "build/gdal/data/jpfgdgml_RdCompt.gfs",
+        "build/gdal/data/jpfgdgml_RdEdg.gfs",
+        "build/gdal/data/jpfgdgml_RdMgtBdry.gfs",
+        "build/gdal/data/jpfgdgml_RdSgmtA.gfs",
+        "build/gdal/data/jpfgdgml_RvrMgtBdry.gfs",
+        "build/gdal/data/jpfgdgml_SBAPt.gfs",
+        "build/gdal/data/jpfgdgml_SBArea.gfs",
+        "build/gdal/data/jpfgdgml_SBBdry.gfs",
+        "build/gdal/data/jpfgdgml_WA.gfs",
+        "build/gdal/data/jpfgdgml_WL.gfs",
+        "build/gdal/data/jpfgdgml_WStrA.gfs",
+        "build/gdal/data/jpfgdgml_WStrL.gfs",
+        "build/gdal/data/netcdf_config.xsd",
+        "build/gdal/data/nitf_spec.xml",
+        "build/gdal/data/nitf_spec.xsd",
+        "build/gdal/data/ogrvrt.xsd",
+        "build/gdal/data/osmconf.ini",
+        "build/gdal/data/ozi_datum.csv",
+        "build/gdal/data/ozi_ellips.csv",
+        "build/gdal/data/pci_datum.txt",
+        "build/gdal/data/pci_ellips.txt",
+        "build/gdal/data/pcs.csv",
+        "build/gdal/data/pcs.override.csv",
+        "build/gdal/data/pds4_template.xml",
+        "build/gdal/data/plscenesconf.json",
+        "build/gdal/data/prime_meridian.csv",
+        "build/gdal/data/projop_wparm.csv",
+        "build/gdal/data/ruian_vf_ob_v1.gfs",
+        "build/gdal/data/ruian_vf_st_uvoh_v1.gfs",
+        "build/gdal/data/ruian_vf_st_v1.gfs",
+        "build/gdal/data/ruian_vf_v1.gfs",
+        "build/gdal/data/s57agencies.csv",
+        "build/gdal/data/s57attributes.csv",
+        "build/gdal/data/s57expectedinput.csv",
+        "build/gdal/data/s57objectclasses.csv",
+        "build/gdal/data/seed_2d.dgn",
+        "build/gdal/data/seed_3d.dgn",
+        "build/gdal/data/stateplane.csv",
+        "build/gdal/data/trailer.dxf",
+        "build/gdal/data/unit_of_measure.csv",
+        "build/gdal/data/vdv452.xml",
+        "build/gdal/data/vdv452.xsd",
+        "build/gdal/data/vertcs.csv",
+        "build/gdal/data/vertcs.override.csv",
+        "build/gdal/license.txt",
+        "build/gdal/share/GL27",
+        "build/gdal/share/IGNF",
+        "build/gdal/share/MD",
+        "build/gdal/share/TN",
+        "build/gdal/share/WI",
+        "build/gdal/share/WO",
+        "build/gdal/share/alaska",
+        "build/gdal/share/conus",
+        "build/gdal/share/epsg",
+        "build/gdal/share/esri",
+        "build/gdal/share/esri.extra",
+        "build/gdal/share/hawaii",
+        "build/gdal/share/nad.lst",
+        "build/gdal/share/nad27",
+        "build/gdal/share/nad83",
+        "build/gdal/share/ntf_r93.gsb",
+        "build/gdal/share/ntv1_can.dat",
+        "build/gdal/share/null",
+        "build/gdal/share/nzgd2kgrid0005.gsb",
+        "build/gdal/share/other.extra",
+        "build/gdal/share/proj_def.dat",
+        "build/gdal/share/prvi",
+        "build/gdal/share/stgeorge",
+        "build/gdal/share/stlrnc",
+        "build/gdal/share/stpaul",
+        "build/gdal/share/world",
+        "build/gdal/x64/expat.dll",
+        "build/gdal/x64/freexl.dll",
+        "build/gdal/x64/gdal204.dll",
+        "build/gdal/x64/gdal_wrap.dll",
+        "build/gdal/x64/gdalconst_wrap.dll",
+        "build/gdal/x64/geos.dll",
+        "build/gdal/x64/geos_c.dll",
+        "build/gdal/x64/iconv.dll",
+        "build/gdal/x64/libcurl.dll",
+        "build/gdal/x64/libeay32.dll",
+        "build/gdal/x64/libmysql.dll",
+        "build/gdal/x64/libpq.dll",
+        "build/gdal/x64/libxml2.dll",
+        "build/gdal/x64/msvcp140.dll",
+        "build/gdal/x64/ogr_wrap.dll",
+        "build/gdal/x64/openjp2.dll",
+        "build/gdal/x64/osr_wrap.dll",
+        "build/gdal/x64/proj.dll",
+        "build/gdal/x64/spatialite.dll",
+        "build/gdal/x64/sqlite3.dll",
+        "build/gdal/x64/ssleay32.dll",
+        "build/gdal/x64/vcruntime140.dll",
+        "build/gdal/x64/xerces-c_3_2.dll",
+        "build/gdal/x64/zlib1.dll",
+        "build/gdal/x86/expat.dll",
+        "build/gdal/x86/freexl.dll",
+        "build/gdal/x86/gdal204.dll",
+        "build/gdal/x86/gdal_wrap.dll",
+        "build/gdal/x86/gdalconst_wrap.dll",
+        "build/gdal/x86/geos.dll",
+        "build/gdal/x86/geos_c.dll",
+        "build/gdal/x86/iconv.dll",
+        "build/gdal/x86/libcurl.dll",
+        "build/gdal/x86/libeay32.dll",
+        "build/gdal/x86/libmysql.dll",
+        "build/gdal/x86/libpq.dll",
+        "build/gdal/x86/libxml2.dll",
+        "build/gdal/x86/msvcp140.dll",
+        "build/gdal/x86/ogr_wrap.dll",
+        "build/gdal/x86/openjp2.dll",
+        "build/gdal/x86/osr_wrap.dll",
+        "build/gdal/x86/proj.dll",
+        "build/gdal/x86/spatialite.dll",
+        "build/gdal/x86/sqlite3.dll",
+        "build/gdal/x86/ssleay32.dll",
+        "build/gdal/x86/vcruntime140.dll",
+        "build/gdal/x86/xerces-c_3_2.dll",
+        "build/gdal/x86/zlib1.dll",
+        "build/net40/GDAL.Native.targets",
+        "gdal.native.2.4.4.nupkg.sha512",
+        "gdal.native.nuspec"
+      ]
+    },
+    "GDAL.Plugins/2.4.4": {
+      "sha512": "2LZHybKO2lqmvHfdOUlF7Xf2iTfAOQ8aI/mGjoXHvu4tddSGIApTVyCNMtIJEAKlCq3naGz3c2vz+7NIswCqrA==",
+      "type": "package",
+      "path": "gdal.plugins/2.4.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/gdal/x64/plugins/cfitsio.dll",
+        "build/gdal/x64/plugins/gdal_BAG.dll",
+        "build/gdal/x64/plugins/gdal_ECW_JP2ECW.dll",
+        "build/gdal/x64/plugins/gdal_FITS.dll",
+        "build/gdal/x64/plugins/gdal_GMT.dll",
+        "build/gdal/x64/plugins/gdal_HDF4.dll",
+        "build/gdal/x64/plugins/gdal_HDF4Image.dll",
+        "build/gdal/x64/plugins/gdal_HDF5.dll",
+        "build/gdal/x64/plugins/gdal_HDF5Image.dll",
+        "build/gdal/x64/plugins/gdal_KEA.dll",
+        "build/gdal/x64/plugins/gdal_MG4Lidar.dll",
+        "build/gdal/x64/plugins/gdal_MrSID.dll",
+        "build/gdal/x64/plugins/gdal_netCDF.dll",
+        "build/gdal/x64/plugins/hdf5.dll",
+        "build/gdal/x64/plugins/hdf5_cpp.dll",
+        "build/gdal/x64/plugins/hdf5_hl.dll",
+        "build/gdal/x64/plugins/hdfdll.dll",
+        "build/gdal/x64/plugins/libecwj2.dll",
+        "build/gdal/x64/plugins/libkea.dll",
+        "build/gdal/x64/plugins/libpq.dll",
+        "build/gdal/x64/plugins/lti_dsdk_9.5.dll",
+        "build/gdal/x64/plugins/lti_lidar_dsdk_1.1.dll",
+        "build/gdal/x64/plugins/mfhdfdll.dll",
+        "build/gdal/x64/plugins/netcdf.dll",
+        "build/gdal/x64/plugins/ogr_AmigoCloud.dll",
+        "build/gdal/x64/plugins/ogr_MSSQLSpatial.dll",
+        "build/gdal/x64/plugins/ogr_PG.dll",
+        "build/gdal/x64/plugins/szip.dll",
+        "build/gdal/x64/plugins/tbb.dll",
+        "build/gdal/x64/plugins/xdrdll.dll",
+        "build/gdal/x86/plugins/cfitsio.dll",
+        "build/gdal/x86/plugins/gdal_BAG.dll",
+        "build/gdal/x86/plugins/gdal_ECW_JP2ECW.dll",
+        "build/gdal/x86/plugins/gdal_FITS.dll",
+        "build/gdal/x86/plugins/gdal_GMT.dll",
+        "build/gdal/x86/plugins/gdal_HDF4.dll",
+        "build/gdal/x86/plugins/gdal_HDF4Image.dll",
+        "build/gdal/x86/plugins/gdal_HDF5.dll",
+        "build/gdal/x86/plugins/gdal_HDF5Image.dll",
+        "build/gdal/x86/plugins/gdal_KEA.dll",
+        "build/gdal/x86/plugins/gdal_MG4Lidar.dll",
+        "build/gdal/x86/plugins/gdal_MrSID.dll",
+        "build/gdal/x86/plugins/gdal_netCDF.dll",
+        "build/gdal/x86/plugins/hdf5.dll",
+        "build/gdal/x86/plugins/hdf5_cpp.dll",
+        "build/gdal/x86/plugins/hdf5_hl.dll",
+        "build/gdal/x86/plugins/hdfdll.dll",
+        "build/gdal/x86/plugins/libecwj2.dll",
+        "build/gdal/x86/plugins/libkea.dll",
+        "build/gdal/x86/plugins/libpq.dll",
+        "build/gdal/x86/plugins/lti_dsdk_9.5.dll",
+        "build/gdal/x86/plugins/lti_lidar_dsdk_1.1.dll",
+        "build/gdal/x86/plugins/mfhdfdll.dll",
+        "build/gdal/x86/plugins/netcdf.dll",
+        "build/gdal/x86/plugins/ogr_AmigoCloud.dll",
+        "build/gdal/x86/plugins/ogr_MSSQLSpatial.dll",
+        "build/gdal/x86/plugins/ogr_PG.dll",
+        "build/gdal/x86/plugins/szip.dll",
+        "build/gdal/x86/plugins/tbb.dll",
+        "build/gdal/x86/plugins/xdrdll.dll",
+        "build/net40/GDAL.Plugins.targets",
+        "gdal.plugins.2.4.4.nupkg.sha512",
+        "gdal.plugins.nuspec",
+        "gdal/ECW5License.rtf",
+        "gdal/ECWLicense.rtf",
+        "gdal/FITSLicense.rtf",
+        "gdal/HDF4License.rtf",
+        "gdal/HDF5License.rtf",
+        "gdal/MRSIDLicense.rtf",
+        "gdal/NetCDFLicense.rtf"
+      ]
+    },
+    "Grasshopper/6.32.20340.21001": {
+      "sha512": "6waJFjdUm7VmzjP5Oq6Sc6CDJTNc0imy95/GKcByljpdaJboVpD0ZKsE8Y3IzmSa41/iNklqpsVHmGoAGfpaUg==",
+      "type": "package",
+      "path": "grasshopper/6.32.20340.21001",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/net45/Grasshopper.targets",
+        "grasshopper.6.32.20340.21001.nupkg.sha512",
+        "grasshopper.nuspec",
+        "grasshopper.png",
+        "lib/net45/GH_IO.XML",
+        "lib/net45/GH_IO.dll",
+        "lib/net45/Grasshopper.dll",
+        "lib/net45/Grasshopper.xml"
+      ]
+    },
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "type": "package",
+      "path": "newtonsoft.json/12.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "RhinoCommon/6.32.20340.21001": {
+      "sha512": "oQmaBkZAY3VrH6svqebsmKnrlnbXfkDCOa+iJEZuzFyJ7SgxDc168DPrEOs9raEaHEFQtUfMs5fwCj4XXrkiHQ==",
+      "type": "package",
+      "path": "rhinocommon/6.32.20340.21001",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Eto-LICENSE.txt",
+        "build/net45/RhinoCommon.targets",
+        "lib/net45/Eto.dll",
+        "lib/net45/Eto.xml",
+        "lib/net45/Rhino.UI.dll",
+        "lib/net45/RhinoCommon.XML",
+        "lib/net45/RhinoCommon.dll",
+        "rhinocommon.6.32.20340.21001.nupkg.sha512",
+        "rhinocommon.nuspec",
+        "rhinocommon.png"
+      ]
+    },
+    "System.Buffers/4.5.1": {
+      "sha512": "Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg==",
+      "type": "package",
+      "path": "system.buffers/4.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Buffers.dll",
+        "lib/net461/System.Buffers.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.1/System.Buffers.dll",
+        "lib/netstandard1.1/System.Buffers.xml",
+        "lib/netstandard2.0/System.Buffers.dll",
+        "lib/netstandard2.0/System.Buffers.xml",
+        "lib/uap10.0.16299/_._",
+        "ref/net45/System.Buffers.dll",
+        "ref/net45/System.Buffers.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.1/System.Buffers.dll",
+        "ref/netstandard1.1/System.Buffers.xml",
+        "ref/netstandard2.0/System.Buffers.dll",
+        "ref/netstandard2.0/System.Buffers.xml",
+        "ref/uap10.0.16299/_._",
+        "system.buffers.4.5.1.nupkg.sha512",
+        "system.buffers.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Memory/4.5.5": {
+      "sha512": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw==",
+      "type": "package",
+      "path": "system.memory/4.5.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Memory.dll",
+        "lib/net461/System.Memory.xml",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard1.1/System.Memory.dll",
+        "lib/netstandard1.1/System.Memory.xml",
+        "lib/netstandard2.0/System.Memory.dll",
+        "lib/netstandard2.0/System.Memory.xml",
+        "ref/netcoreapp2.1/_._",
+        "system.memory.4.5.5.nupkg.sha512",
+        "system.memory.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Numerics.Vectors/4.5.0": {
+      "sha512": "QQTlPTl06J/iiDbJCiepZ4H//BVraReU4O4EoRw1U02H5TLUIT7xn3GnDp9AXPSlJUDyFs4uWjWafNX6WrAojQ==",
+      "type": "package",
+      "path": "system.numerics.vectors/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Numerics.Vectors.dll",
+        "lib/net46/System.Numerics.Vectors.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.0/System.Numerics.Vectors.dll",
+        "lib/netstandard1.0/System.Numerics.Vectors.xml",
+        "lib/netstandard2.0/System.Numerics.Vectors.dll",
+        "lib/netstandard2.0/System.Numerics.Vectors.xml",
+        "lib/portable-net45+win8+wp8+wpa81/System.Numerics.Vectors.dll",
+        "lib/portable-net45+win8+wp8+wpa81/System.Numerics.Vectors.xml",
+        "lib/uap10.0.16299/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/System.Numerics.Vectors.dll",
+        "ref/net45/System.Numerics.Vectors.xml",
+        "ref/net46/System.Numerics.Vectors.dll",
+        "ref/net46/System.Numerics.Vectors.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.0/System.Numerics.Vectors.dll",
+        "ref/netstandard1.0/System.Numerics.Vectors.xml",
+        "ref/netstandard2.0/System.Numerics.Vectors.dll",
+        "ref/netstandard2.0/System.Numerics.Vectors.xml",
+        "ref/uap10.0.16299/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.numerics.vectors.4.5.0.nupkg.sha512",
+        "system.numerics.vectors.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Resources.Extensions/8.0.0-preview.7.23375.6": {
+      "sha512": "Vs1AOrExWKFfzbPHla/nHcvBW0vZDLoPe04IBQrKR7RaIjJ0msN4C3VaoFWROH8yOjFdSlQVfCUwuQPVEgKUjA==",
+      "type": "package",
+      "path": "system.resources.extensions/8.0.0-preview.7.23375.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Resources.Extensions.targets",
+        "buildTransitive/net462/System.Resources.Extensions.targets",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Resources.Extensions.targets",
+        "lib/net462/System.Resources.Extensions.dll",
+        "lib/net462/System.Resources.Extensions.xml",
+        "lib/net6.0/System.Resources.Extensions.dll",
+        "lib/net6.0/System.Resources.Extensions.xml",
+        "lib/net7.0/System.Resources.Extensions.dll",
+        "lib/net7.0/System.Resources.Extensions.xml",
+        "lib/net8.0/System.Resources.Extensions.dll",
+        "lib/net8.0/System.Resources.Extensions.xml",
+        "lib/netstandard2.0/System.Resources.Extensions.dll",
+        "lib/netstandard2.0/System.Resources.Extensions.xml",
+        "system.resources.extensions.8.0.0-preview.7.23375.6.nupkg.sha512",
+        "system.resources.extensions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Runtime.CompilerServices.Unsafe/4.5.3": {
+      "sha512": "3TIsJhD1EiiT0w2CcDMN/iSSwnNnsrnbzeVHSKkaEgV85txMprmuO+Yq2AdSbeVGcg28pdNDTPK87tJhX7VFHw==",
+      "type": "package",
+      "path": "system.runtime.compilerservices.unsafe/4.5.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/net461/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/net461/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/net461/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "system.runtime.compilerservices.unsafe.4.5.3.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.ValueTuple/4.5.0": {
+      "sha512": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
+      "type": "package",
+      "path": "system.valuetuple/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.ValueTuple.dll",
+        "lib/net461/System.ValueTuple.xml",
+        "lib/net47/System.ValueTuple.dll",
+        "lib/net47/System.ValueTuple.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.0/System.ValueTuple.dll",
+        "lib/netstandard1.0/System.ValueTuple.xml",
+        "lib/netstandard2.0/_._",
+        "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
+        "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.xml",
+        "lib/uap10.0.16299/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net461/System.ValueTuple.dll",
+        "ref/net47/System.ValueTuple.dll",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard2.0/_._",
+        "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
+        "ref/uap10.0.16299/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.valuetuple.4.5.0.nupkg.sha512",
+        "system.valuetuple.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "Unofficial.laszip.net/2.2.0": {
+      "sha512": "vyGYt0+VRM8ZFiUI5RU8QvhD5wN5T9v4Ec09dNCkbo/o4kk9pazFFtrEoPO9E9TeAKPRAYVff9dQyCzQ9A92Eg==",
+      "type": "package",
+      "path": "unofficial.laszip.net/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net4/laszip.net.dll",
+        "unofficial.laszip.net.2.2.0.nupkg.sha512",
+        "unofficial.laszip.net.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.8": [
+      "GDAL >= 2.4.4",
+      "GDAL.Native >= 2.4.4",
+      "GDAL.Plugins >= 2.4.4",
+      "Grasshopper >= 6.32.20340.21001",
+      "Newtonsoft.Json >= 12.0.3",
+      "RhinoCommon >= 6.32.20340.21001",
+      "System.Resources.Extensions >= 8.0.0-preview.7.23375.6",
+      "System.ValueTuple >= 4.5.0",
+      "Unofficial.laszip.net >= 2.2.0"
+    ]
+  },
+  "packageFolders": {
+    "/Users/jiaqizheng/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/TwinLand.csproj",
+      "projectName": "TwinLand",
+      "projectPath": "/Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/TwinLand.csproj",
+      "packagesPath": "/Users/jiaqizheng/.nuget/packages/",
+      "outputPath": "/Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/jiaqizheng/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net48"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net48": {
+        "targetAlias": "net48",
+        "dependencies": {
+          "GDAL": {
+            "target": "Package",
+            "version": "[2.4.4, )"
+          },
+          "GDAL.Native": {
+            "target": "Package",
+            "version": "[2.4.4, )"
+          },
+          "GDAL.Plugins": {
+            "target": "Package",
+            "version": "[2.4.4, )"
+          },
+          "Grasshopper": {
+            "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "target": "Package",
+            "version": "[6.32.20340.21001, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[12.0.3, )"
+          },
+          "RhinoCommon": {
+            "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "target": "Package",
+            "version": "[6.32.20340.21001, )"
+          },
+          "System.Resources.Extensions": {
+            "target": "Package",
+            "version": "[8.0.0-preview.7.23375.6, )"
+          },
+          "System.ValueTuple": {
+            "target": "Package",
+            "version": "[4.5.0, )"
+          },
+          "Unofficial.laszip.net": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/Library/Frameworks/Mono.framework/Versions/6.12.0/lib/mono/msbuild/Current/bin/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

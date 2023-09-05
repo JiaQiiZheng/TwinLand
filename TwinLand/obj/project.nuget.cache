@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "S/ex1VRCGQZcwfqML3g+v3N7TmZ6DAgizFkRWUvUAEFm9x0zjKogH/Bf7mJRhbdtr1E9lC7holkhST+LKy0a6w==",
+  "success": true,
+  "projectFilePath": "/Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/TwinLand.csproj",
+  "expectedPackageFiles": [
+    "/Users/jiaqizheng/.nuget/packages/gdal/2.4.4/gdal.2.4.4.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/gdal.native/2.4.4/gdal.native.2.4.4.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/gdal.plugins/2.4.4/gdal.plugins.2.4.4.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/grasshopper/6.32.20340.21001/grasshopper.6.32.20340.21001.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/rhinocommon/6.32.20340.21001/rhinocommon.6.32.20340.21001.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/system.resources.extensions/8.0.0-preview.7.23375.6/system.resources.extensions.8.0.0-preview.7.23375.6.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/system.runtime.compilerservices.unsafe/4.5.3/system.runtime.compilerservices.unsafe.4.5.3.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
+    "/Users/jiaqizheng/.nuget/packages/unofficial.laszip.net/2.2.0/unofficial.laszip.net.2.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
