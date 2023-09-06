@@ -58,7 +58,7 @@ namespace RESTful
             var ghLibFile = typeof(ImportVector).Assembly.Location;
             var executingDirectory = Path.GetDirectoryName(ghLibFile);
 
-            if (string.IsNullOrEmpty(executingDirectory))
+            if (string.IsNullOrEmpty(executingDirectory)) 
                 throw new InvalidOperationException("cannot get executing directory");
 
             var gdalPath = Path.Combine(executingDirectory, "gdal");

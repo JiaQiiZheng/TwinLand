@@ -16,7 +16,7 @@ using TwinLand.Utils;
 
 namespace TwinLand
 {
-    public class RESTGeocode : TwinLandComponent
+    public class GetGeocode : TwinLandComponent
     {
         /// <summary>
         /// Each implementation of GH_Component must provide a public 
@@ -25,7 +25,7 @@ namespace TwinLand
         /// Subcategory the panel. If you use non-existing tab or panel names, 
         /// new tabs/panels will automatically be created.
         /// </summary>
-        public RESTGeocode()
+        public GetGeocode()
             : base("RESTGeocode", "RESTGeocode",
                 "RESTGeocode",
                  "REST")

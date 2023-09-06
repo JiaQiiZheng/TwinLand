@@ -25,6 +25,9 @@ using OSGeo.OGR;
 using OSGeo.GDAL;
 using OSGeo.OSR;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using TwinLand.Properties;
 
 namespace TwinLand
 {
@@ -373,12 +376,21 @@ namespace TwinLand
         public static string GetEndpoints()
         {
             string jsonString = string.Empty;
-            using (System.Net.WebClient wc = new System.Net.WebClient())
-            {
-                string URI = "https://raw.githubusercontent.com/blueherongis/Heron/master/HeronServiceEndpoints.json";
-                jsonString = wc.DownloadString(URI);
-            }
 
+            // get from local resources
+            Console.WriteLine(@"./Resources/TwinLandServiceEndpoints.json");
+            jsonString = File.ReadAllText(@"./Resources/TwinLandServiceEndpoints.json");
+            
+            // get from github
+            if (string.IsNullOrEmpty(jsonString))
+            {
+                using (System.Net.WebClient wc = new System.Net.WebClient())
+                {
+                    string URI = "https://raw.githubusercontent.com/blueherongis/Heron/master/HeronServiceEndpoints.json";
+                    jsonString = wc.DownloadString(URI);
+                }   
+            }
+            
             return jsonString;
         }
         
@@ -684,6 +696,22 @@ namespace TwinLand
                 return m;
             }
 
+        }
+        
+        public static string GetOSMURL(int timeout, string searchTerm, string left, string bottom, string right, string top, string url)
+        {
+            string search = "(node" + searchTerm + "; way" + searchTerm + "; relation" + searchTerm + ";);(._;>;);";
+            string u = url.Replace("{timeout}", timeout.ToString());
+            if (searchTerm.Length > 0)
+            {
+                u = u.Replace("{searchTerm}", search);
+            }
+            else { u = u.Replace("{searchTerm}", "(node;way;relation;);(._;>;);"); }
+            u = u.Replace("{left}", left);
+            u = u.Replace("{bottom}", bottom);
+            u = u.Replace("{right}", right);
+            u = u.Replace("{top}", top);
+            return u;
         }
     }
 }

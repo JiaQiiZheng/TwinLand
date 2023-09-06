@@ -1,3 +1,4 @@
+/Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/bin/Debug/net48/Resources/TwinLandServiceEndpoints.json
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/bin/Debug/net48/TwinLand.gha
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/bin/Debug/net48/TwinLand.pdb
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/bin/Debug/net48/gdal_csharp.dll
@@ -12,9 +13,11 @@
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/bin/Debug/net48/System.Runtime.CompilerServices.Unsafe.dll
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/bin/Debug/net48/System.ValueTuple.dll
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/bin/Debug/net48/laszip.net.dll
+/Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/obj/Debug/net48/NuGet/88EB9CAA0D8463A21ABE3EA1C187364DCE308659/GDAL/2.4.4/GdalConfiguration.cs
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/obj/Debug/net48/TwinLand.csproj.AssemblyReference.cache
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/obj/Debug/net48/TwinLand.Properties.Resources.resources
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/obj/Debug/net48/TwinLand.csproj.GenerateResource.cache
+/Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/obj/Debug/net48/TwinLand.GeneratedMSBuildEditorConfig.editorconfig
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/obj/Debug/net48/TwinLand.AssemblyInfoInputs.cache
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/obj/Debug/net48/TwinLand.AssemblyInfo.cs
 /Users/jiaqizheng/Documents/Projects/Grasshopper Development/TwinLand/TwinLand/obj/Debug/net48/TwinLand.csproj.CoreCompileInputs.cache
