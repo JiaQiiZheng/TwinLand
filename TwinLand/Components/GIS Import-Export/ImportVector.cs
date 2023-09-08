@@ -15,7 +15,7 @@ namespace TwinLand
     public class ImportVector : TwinLandComponent
     {
         //Class Constructor
-        public ImportVector() : base("Import Vector", "ImportVector", "Import vector GIS data clipped to a boundary, including SHP, GeoJSON, OSM, KML, MVT and GDB folders.", "GIS Import | Export")
+        public ImportVector() : base("Import Vector", "ImportVector", "Import vector GIS data clipped to a boundary, including SHP, GeoJSON, OSM, KML, MVT and GDB folders.", "Import & Export")
         {
 
         }

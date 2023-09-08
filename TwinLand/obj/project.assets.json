@@ -96,6 +96,41 @@
           }
         }
       },
+      "OsmSharp/6.2.0": {
+        "type": "package",
+        "dependencies": {
+          "protobuf-net": "2.3.7"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "System.Xml"
+        ],
+        "compile": {
+          "lib/net45/OsmSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net45/OsmSharp.dll": {}
+        }
+      },
+      "protobuf-net/2.3.7": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "System.Configuration",
+          "System.Runtime.Serialization",
+          "System.ServiceModel"
+        ],
+        "compile": {
+          "lib/net40/protobuf-net.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net40/protobuf-net.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "RhinoCommon/6.32.20340.21001": {
         "type": "package",
         "compile": {
@@ -950,6 +985,43 @@
         "packageIcon.png"
       ]
     },
+    "OsmSharp/6.2.0": {
+      "sha512": "dJsrYCWSRKd13p5G9iuygM+W4a2SrErTS93kzdcb2sB/OrR4RHLeHokCbef8ZOGFZEqqsMVZ4CVQ+QRVwTHW8Q==",
+      "type": "package",
+      "path": "osmsharp/6.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/OsmSharp.dll",
+        "lib/netstandard1.3/OsmSharp.dll",
+        "lib/netstandard2.0/OsmSharp.dll",
+        "osmsharp.6.2.0.nupkg.sha512",
+        "osmsharp.nuspec"
+      ]
+    },
+    "protobuf-net/2.3.7": {
+      "sha512": "JG5ZUd42w4osBaDrFpJoEOelyRsuxV+EzY4c8J5o/Qhm+lqhm2iYWUl/T3zf7vhONBD968K190d7co1I2lucOQ==",
+      "type": "package",
+      "path": "protobuf-net/2.3.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20/protobuf-net.dll",
+        "lib/net20/protobuf-net.xml",
+        "lib/net35/protobuf-net.dll",
+        "lib/net35/protobuf-net.xml",
+        "lib/net40/protobuf-net.dll",
+        "lib/net40/protobuf-net.xml",
+        "lib/netstandard1.0/protobuf-net.dll",
+        "lib/netstandard1.0/protobuf-net.xml",
+        "lib/netstandard1.3/protobuf-net.dll",
+        "lib/netstandard1.3/protobuf-net.xml",
+        "lib/netstandard2.0/protobuf-net.dll",
+        "lib/netstandard2.0/protobuf-net.xml",
+        "protobuf-net.2.3.7.nupkg.sha512",
+        "protobuf-net.nuspec"
+      ]
+    },
     "RhinoCommon/6.32.20340.21001": {
       "sha512": "oQmaBkZAY3VrH6svqebsmKnrlnbXfkDCOa+iJEZuzFyJ7SgxDc168DPrEOs9raEaHEFQtUfMs5fwCj4XXrkiHQ==",
       "type": "package",
@@ -1193,6 +1265,7 @@
       "Grasshopper >= 6.32.20340.21001",
       "Microsoft.NETFramework.ReferenceAssemblies >= 1.0.3",
       "Newtonsoft.Json >= 12.0.3",
+      "OsmSharp >= 6.2.0",
       "RhinoCommon >= 6.32.20340.21001",
       "System.Resources.Extensions >= 8.0.0-preview.7.23375.6",
       "System.ValueTuple >= 4.5.0",
@@ -1262,6 +1335,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[12.0.3, )"
+          },
+          "OsmSharp": {
+            "target": "Package",
+            "version": "[6.2.0, )"
           },
           "RhinoCommon": {
             "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",

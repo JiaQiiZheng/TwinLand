@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Windows.Forms;
 
@@ -35,9 +36,9 @@ namespace TwinLand
       pManager.AddCurveParameter("Boundary", "boundary", "The framework of download area for OpenStreetMap API",
         GH_ParamAccess.item);
       pManager.AddTextParameter("TargetFolder", "targetFolder", "The folder path of the downloaded .osm file located",
-        GH_ParamAccess.item);
+        GH_ParamAccess.item, Path.GetTempPath());
       pManager.AddTextParameter("FileName", "fileName", "The file name of the downloaded .osm file", GH_ParamAccess.item, OSMSource);
-      pManager.AddTextParameter("LayerOfOpenStreetMap", "layerOfOSM", "Optional indicate specific layer in OpenStreetMap dataset",
+      pManager.AddTextParameter("OSMTag_Key", "OSMTag_Key", "Optional indicate specific layer in OpenStreetMap dataset",
         GH_ParamAccess.item);
       pManager.AddTextParameter("OverpassQueryLanguage", "overpassQL",
         "Code applying onto OpenStreetMap data fetching process", GH_ParamAccess.item);
@@ -89,8 +90,12 @@ namespace TwinLand
         fileName = osmSource;
       }
       
-      string layerOfOSM = string.Empty;
-      DA.GetData("LayerOfOpenStreetMap", ref layerOfOSM);
+      string OSMTag_Key = string.Empty;
+      DA.GetData("OSMTag_Key", ref OSMTag_Key);
+      if (!string.IsNullOrEmpty(OSMTag_Key))
+      {
+        OSMTag_Key = System.Net.WebUtility.UrlEncode($"[{OSMTag_Key}]");
+      }
       
       string overpassQL = string.Empty;
       DA.GetData("OverpassQueryLanguage", ref overpassQL);
@@ -142,7 +147,7 @@ namespace TwinLand
         }
         else
         {
-          oq = Convert.GetOSMURL(timeout, layerOfOSM, left, bottom, right, top, osmURL);
+          oq = Convert.GetOSMURL(timeout, OSMTag_Key, left, bottom, right, top, osmURL);
           osmQuery.Append(new GH_String(oq));
           DA.SetDataTree(1, osmQuery);
         }

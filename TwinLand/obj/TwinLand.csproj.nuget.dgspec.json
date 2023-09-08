@@ -65,6 +65,10 @@
               "target": "Package",
               "version": "[12.0.3, )"
             },
+            "OsmSharp": {
+              "target": "Package",
+              "version": "[6.2.0, )"
+            },
             "RhinoCommon": {
               "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "target": "Package",

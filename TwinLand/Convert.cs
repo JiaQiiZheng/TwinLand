@@ -377,18 +377,26 @@ namespace TwinLand
         {
             string jsonString = string.Empty;
 
-            // get from local resources
-            Console.WriteLine(@"./Resources/TwinLandServiceEndpoints.json");
-            jsonString = File.ReadAllText(@"./Resources/TwinLandServiceEndpoints.json");
-            
             // get from github
+            using (System.Net.WebClient wc = new System.Net.WebClient())
+            {
+                string URI = "https://raw.githubusercontent.com/JiaQiiZheng/TwinLand/main/TwinLand/Resources/TwinLandServiceEndpoints.json";
+                jsonString = wc.DownloadString(URI);
+            }
+            
+            // get from local resources
             if (string.IsNullOrEmpty(jsonString))
             {
-                using (System.Net.WebClient wc = new System.Net.WebClient())
+                var assembly = Assembly.GetExecutingAssembly();
+                var fileName = "TwinLand.Resources.TwinLandServiceEndpoints.json";
+                
+                using(Stream stream = assembly.GetManifestResourceStream(fileName))
+                using (StreamReader reader = new StreamReader(stream))
                 {
-                    string URI = "https://raw.githubusercontent.com/blueherongis/Heron/master/HeronServiceEndpoints.json";
-                    jsonString = wc.DownloadString(URI);
-                }   
+                    jsonString = reader.ReadToEnd();
+                }
+
+                Console.WriteLine(jsonString);
             }
             
             return jsonString;
