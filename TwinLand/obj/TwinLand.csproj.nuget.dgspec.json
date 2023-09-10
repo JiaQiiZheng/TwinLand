@@ -51,9 +51,12 @@
               "version": "[2.4.4, )"
             },
             "Grasshopper": {
-              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "target": "Package",
-              "version": "[6.32.20340.21001, )"
+              "version": "[7.32.23215.19001, )"
+            },
+            "Microsoft.NETCore.Runtime": {
+              "target": "Package",
+              "version": "[1.0.2-rc2-24027, )"
             },
             "Microsoft.NETFramework.ReferenceAssemblies": {
               "suppressParent": "All",
@@ -63,16 +66,19 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[12.0.3, )"
+              "version": "[13.0.3, )"
             },
             "OsmSharp": {
               "target": "Package",
-              "version": "[6.2.0, )"
+              "version": "[7.0.0-pre022, )"
             },
             "RhinoCommon": {
-              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "target": "Package",
-              "version": "[6.32.20340.21001, )"
+              "version": "[7.32.23215.19001, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[8.0.0-preview.7.23375.5, )"
             },
             "System.Resources.Extensions": {
               "target": "Package",

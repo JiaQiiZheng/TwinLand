@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+
 using GH_IO.Serialization;
 using Grasshopper;
 using Grasshopper.Kernel;
@@ -50,9 +51,9 @@ namespace TwinLand
     /// </summary>
     protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
     {
-      pManager.AddTextParameter("DEM_FilePath", "DEM", "The file path of downloaded DEM file", GH_ParamAccess.item);
+      pManager.AddTextParameter("DEM_FilePath", "DEM", "The file path of downloaded DEM file", GH_ParamAccess.tree);
       pManager.AddTextParameter("TopoQuery", "TopoQuery", "The response query from DEM file download process",
-        GH_ParamAccess.item);
+        GH_ParamAccess.tree);
     }
 
     /// <summary>
@@ -78,6 +79,10 @@ namespace TwinLand
 
       string fileName = string.Empty;
       DA.GetData("FileName", ref fileName);
+      if (string.IsNullOrEmpty(fileName))
+      {
+        fileName = source_DEM;
+      }
 
       bool run = false;
       DA.GetData("Run", ref run);
@@ -142,8 +147,8 @@ namespace TwinLand
         sourceList_DEM = TwinLand.Convert.GetEndpoints();
       }
 
-      var jsonSourceList = JObject.Parse(sourceList_DEM)["REST Topo"];
-      foreach (var service in jsonSourceList)
+      JObject jsonSourceOject = JObject.Parse(sourceList_DEM);
+      foreach (var service in jsonSourceOject["REST Topo"])
       {
         string sName = service["service"].ToString();
 
@@ -170,6 +175,7 @@ namespace TwinLand
       RecordUndoEvent("source_DEM");
 
       source_DEM = code;
+      //TODO. study more about JSONPath expression.
       dem_url = JObject.Parse(SourceList_DEM)["REST Topo"].SelectToken("[?(@.service == '" + Source_DEM + "')].url").ToString();
       Message = source_DEM;
       

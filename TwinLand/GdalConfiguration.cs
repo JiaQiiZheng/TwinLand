@@ -27,7 +27,6 @@
  * DEALINGS IN THE SOFTWARE.
  *****************************************************************************/
 
-using TwinLand;
 using System;
 using System.IO;
 using System.Reflection;
@@ -38,8 +37,8 @@ namespace RESTful
 {
     public static partial class GdalConfiguration
     {
-        private static bool _configuredOgr;
-        private static bool _configuredGdal;
+        private static volatile bool _configuredOgr;
+        private static volatile bool _configuredGdal;
 
         /// <summary>
         /// Function to determine which platform we're on
@@ -55,20 +54,22 @@ namespace RESTful
         /// </summary>
         static GdalConfiguration()
         {
-            var ghLibFile = typeof(ImportVector).Assembly.Location;
-            var executingDirectory = Path.GetDirectoryName(ghLibFile);
+            var executingAssemblyFile = new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath;
+            var executingDirectory = Path.Combine(Path.GetDirectoryName(executingAssemblyFile), "net48");
 
-            if (string.IsNullOrEmpty(executingDirectory)) 
+            if (string.IsNullOrEmpty(executingDirectory))
                 throw new InvalidOperationException("cannot get executing directory");
+
 
             var gdalPath = Path.Combine(executingDirectory, "gdal");
             var nativePath = Path.Combine(gdalPath, GetPlatform());
 
+
             // Prepend native path to environment path, to ensure the
             // right libs are being used.
-            var path = Environment.GetEnvironmentVariable("Path");
+            var path = Environment.GetEnvironmentVariable("PATH");
             path = nativePath + ";" + Path.Combine(nativePath, "plugins") + ";" + path;
-            Environment.SetEnvironmentVariable("Path", path);
+            Environment.SetEnvironmentVariable("PATH", path);
 
             // Set the additional GDAL environment variables.
             var gdalData = Path.Combine(gdalPath, "data");
@@ -85,8 +86,6 @@ namespace RESTful
             var projSharePath = Path.Combine(gdalPath, "share");
             Environment.SetEnvironmentVariable("PROJ_LIB", projSharePath);
             Gdal.SetConfigOption("PROJ_LIB", projSharePath);
-
-            OSGeo.GDAL.Gdal.SetConfigOption("GDAL_HTTP_UNSAFESSL", "YES");
         }
 
         /// <summary>

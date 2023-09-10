@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)system.text.json/6.0.7/buildTransitive/netstandard2.0/System.Text.Json.targets" Condition="Exists('$(NuGetPackageRoot)system.text.json/6.0.7/buildTransitive/netstandard2.0/System.Text.Json.targets')" />
     <Import Project="$(NuGetPackageRoot)system.resources.extensions/8.0.0-preview.7.23375.6/buildTransitive/net462/System.Resources.Extensions.targets" Condition="Exists('$(NuGetPackageRoot)system.resources.extensions/8.0.0-preview.7.23375.6/buildTransitive/net462/System.Resources.Extensions.targets')" />
-    <Import Project="$(NuGetPackageRoot)rhinocommon/6.32.20340.21001/build/net45/RhinoCommon.targets" Condition="Exists('$(NuGetPackageRoot)rhinocommon/6.32.20340.21001/build/net45/RhinoCommon.targets')" />
+    <Import Project="$(NuGetPackageRoot)rhinocommon/7.32.23215.19001/build/net48/RhinoCommon.targets" Condition="Exists('$(NuGetPackageRoot)rhinocommon/7.32.23215.19001/build/net48/RhinoCommon.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.netframework.referenceassemblies.net48/1.0.3/build/Microsoft.NETFramework.ReferenceAssemblies.net48.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.netframework.referenceassemblies.net48/1.0.3/build/Microsoft.NETFramework.ReferenceAssemblies.net48.targets')" />
-    <Import Project="$(NuGetPackageRoot)grasshopper/6.32.20340.21001/build/net45/Grasshopper.targets" Condition="Exists('$(NuGetPackageRoot)grasshopper/6.32.20340.21001/build/net45/Grasshopper.targets')" />
+    <Import Project="$(NuGetPackageRoot)grasshopper/7.32.23215.19001/build/net48/Grasshopper.targets" Condition="Exists('$(NuGetPackageRoot)grasshopper/7.32.23215.19001/build/net48/Grasshopper.targets')" />
     <Import Project="$(NuGetPackageRoot)gdal.native/2.4.4/build/net40/GDAL.Native.targets" Condition="Exists('$(NuGetPackageRoot)gdal.native/2.4.4/build/net40/GDAL.Native.targets')" />
     <Import Project="$(NuGetPackageRoot)gdal.plugins/2.4.4/build/net40/GDAL.Plugins.targets" Condition="Exists('$(NuGetPackageRoot)gdal.plugins/2.4.4/build/net40/GDAL.Plugins.targets')" />
   </ImportGroup>
