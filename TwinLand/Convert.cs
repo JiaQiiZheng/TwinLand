@@ -721,5 +721,123 @@ namespace TwinLand
             u = u.Replace("{top}", top);
             return u;
         }
+        
+        //get the range of tiles that intersect with the bounding box of the polygon
+        public static (Interval XRange, Interval YRange) GetTileRange(BoundingBox bnds, int zoom)
+        {
+            Point3d bndsMin = Convert.XYZToWGS(bnds.Min);
+            Point3d bndsMax = Convert.XYZToWGS(bnds.Max);
+            double xm = bndsMin.X;
+            double xmx = bndsMax.X;
+            double ym = bndsMin.Y;
+            double ymx = bndsMax.Y;
+            List<int> starting = Convert.DegToNum(ymx, xm, zoom);
+            List<int> ending = Convert.DegToNum(ym, xmx, zoom);
+            var x_range = new Interval(starting[0], ending[0]);
+            var y_range = new Interval(starting[1], ending[1]);
+            return (x_range, y_range);
+        }
+        
+        //download all tiles within bbox
+        public static List<int> DegToNum(double lat_deg, double lon_deg, int zoom)
+        {
+            double lat_rad = Rhino.RhinoMath.ToRadians(lat_deg);
+            int n = (1 << zoom);
+            int xtile = (int)Math.Floor((lon_deg + 180.0) / 360 * n);
+            int ytile = (int)Math.Floor((1 - Math.Log(Math.Tan(lat_rad) + (1 / Math.Cos(lat_rad))) / Math.PI) / 2.0 * n);
+            return new List<int> { xtile, ytile };
+        }
+        
+        //get the tile as a polyline object
+        public static Polyline GetTileAsPolygon(int z, int y, int x)
+        {
+            List<double> nw = Convert.NumToDeg(x, y, z);
+            List<double> se = Convert.NumToDeg(x + 1, y + 1, z);
+            double xm = nw[1];
+            double xmx = se[1];
+            double ym = se[0];
+            double ymx = nw[0];
+            Polyline tile_bound = new Polyline();
+            tile_bound.Add(Convert.WGSToXYZ(new Point3d(xm, ym, 0)));
+            tile_bound.Add(Convert.WGSToXYZ(new Point3d(xmx, ym, 0)));
+            tile_bound.Add(Convert.WGSToXYZ(new Point3d(xmx, ymx, 0)));
+            tile_bound.Add(Convert.WGSToXYZ(new Point3d(xm, ymx, 0)));
+            tile_bound.Add(Convert.WGSToXYZ(new Point3d(xm, ym, 0)));
+            return tile_bound;
+        }
+        
+        public static List<double> NumToDeg(int xtile, int ytile, int zoom)
+        {
+            double n = Math.Pow(2, zoom);
+            double lon_deg = xtile / n * 360 - 180;
+            double lat_rad = Math.Atan(Math.Sinh(Math.PI * (1 - 2 * ytile / n)));
+            double lat_deg = Rhino.RhinoMath.ToDegrees(lat_rad);
+            return new List<double> { lat_deg, lon_deg };
+        }
+        
+        ///Check if cached images exist in cache folder
+        public static bool CheckCacheImagesExist(List<string> filePaths)
+        {
+            foreach (string filePath in filePaths)
+            {
+                if (!File.Exists(filePath))
+                    return false;
+            }
+            return true;
+        }
+        
+        //convert the generic URL to get the specific URL of the tile
+        public static string GetZoomURL(int x, int y, int z, string url)
+        {
+            string u = url.Replace("{x}", x.ToString());
+            u = u.Replace("{y}", y.ToString());
+            u = u.Replace("{z}", z.ToString());
+            return u;
+        }
+    }
+    
+    public static class BitmapExtension
+    {
+        public static void AddCommentsToJPG(this Bitmap bitmap, string comment)
+        {
+            //add tile range meta data to image comments
+            //doesn't work for png, need to find a common ID between jpg and png
+            //https://stackoverflow.com/questions/18820525/how-to-get-and-set-propertyitems-for-an-image/25162782#25162782
+            var newItem = (System.Drawing.Imaging.PropertyItem)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(System.Drawing.Imaging.PropertyItem));
+            newItem.Id = 40092;
+            newItem.Type = 1;
+            newItem.Value = Encoding.Unicode.GetBytes(comment);
+            newItem.Len = newItem.Value.Length;
+            bitmap.SetPropertyItem(newItem);
+        }
+
+        public static string GetCommentsFromJPG(this Bitmap bitmap)
+        {
+            //doesn't work for png
+            System.Drawing.Imaging.PropertyItem prop = bitmap.GetPropertyItem(40092);
+            string comment = Encoding.Unicode.GetString(prop.Value);
+            return comment;
+        }
+
+        public static void AddCommentsToPNG(this Bitmap bitmap, string comment)
+        {
+            //add tile range meta data to image comments
+            //ID:40094 doesn't seem to work for png and 40092 only works for JPG
+            //https://stackoverflow.com/questions/18820525/how-to-get-and-set-propertyitems-for-an-image/25162782#25162782
+            var newItem = (System.Drawing.Imaging.PropertyItem)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(System.Drawing.Imaging.PropertyItem));
+            newItem.Id = 40094;
+            newItem.Type = 1;
+            newItem.Value = Encoding.Unicode.GetBytes(comment);
+            newItem.Len = newItem.Value.Length;
+            bitmap.SetPropertyItem(newItem);
+        }
+
+        public static string GetCommentsFromPNG(this Bitmap bitmap)
+        {
+            //doesn't work for png
+            System.Drawing.Imaging.PropertyItem prop = bitmap.GetPropertyItem(40094);
+            string comment = Encoding.Unicode.GetString(prop.Value);
+            return comment;
+        }
     }
 }

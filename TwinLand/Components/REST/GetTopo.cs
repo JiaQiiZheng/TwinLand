@@ -245,7 +245,7 @@ namespace TwinLand
     /// </summary>
     public override Guid ComponentGuid
     {
-      get { return new Guid("18726582-0304-4204-9882-cfeace669f1d"); }
+      get { return new Guid("d3519069-53c7-43df-897d-d2c5bc3779a6"); }
     }
   }
 }

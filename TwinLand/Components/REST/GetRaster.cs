@@ -1,89 +1,77 @@
-using System;
-using System.IO;
-using System.Xml;
-using System.Xml.Linq;
-using System.Linq;
-using System.Data;
-using System.Drawing;
-using System.Reflection;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net;
-using System.Net.Http;
-using System.Windows.Forms;
-using Grasshopper;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Data;
-using Grasshopper.Kernel.Types;
 using Grasshopper.Kernel.Special;
-using Rhino;
-using Rhino.Geometry;
-using Rhino.DocObjects;
-using Rhino.Collections;
-using GH_IO;
-using GH_IO.Serialization;
-using Newtonsoft.Json.Bson;
+using Grasshopper.Kernel.Types;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Serialization;
+using Rhino.Geometry;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Windows.Forms;
 
 namespace TwinLand
 {
-  public class GetRaster : TwinLandRasterPreviewComponent
-  {
-    /// <summary>
-    /// Each implementation of GH_Component must provide a public 
-    /// constructor without any arguments.
-    /// Category represents the Tab in which the component will appear, 
-    /// Subcategory the panel. If you use non-existing tab or panel names, 
-    /// new tabs/panels will automatically be created.
-    /// </summary>
-    public GetRaster()
-      : base("GetRaster", "GetRaster",
-        "Get raster image from services", "REST")
+    public class GetRaster : TwinLandRasterPreviewComponent
     {
-    }
+        /// <summary>
+        /// Each implementation of GH_Component must provide a public 
+        /// constructor without any arguments.
+        /// Category represents the Tab in which the component will appear, 
+        /// Subcategory the panel. If you use non-existing tab or panel names, 
+        /// new tabs/panels will automatically be created.
+        /// </summary>
+        public GetRaster()
+            : base("GetRaster", "GetRaster",
+                "GetRaster", "REST")
+        {
+        }
 
-    /// <summary>
-    /// Registers all the input parameters for this component.
-    /// </summary>
-    protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
-    {
-        pManager.AddCurveParameter("Boundary", "boundary", "Boundary curve(s) for imagery", GH_ParamAccess.list);
-        pManager.AddIntegerParameter("Resolution", "resolution", "Maximum resolution for images", GH_ParamAccess.item,1024);
-        pManager.AddTextParameter("Target Folder", "folderPath", "Folder to save image files", GH_ParamAccess.item, Path.GetTempPath());
-        pManager.AddTextParameter("Prefix", "prefix", "Prefix for image file name", GH_ParamAccess.item, "restRaster");
-        pManager.AddTextParameter("REST URL", "URL", "ArcGIS REST Service website to query. Use the component \nmenu item \"Create REST Raster Source List\" for some examples.", GH_ParamAccess.item);
-        pManager.AddBooleanParameter("run", "get", "Go ahead and download imagery from the Service", GH_ParamAccess.item, false);
+        /// <summary>
+        /// Registers all the input parameters for this component.
+        /// </summary>
+        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        {
+            pManager.AddCurveParameter("Boundary", "boundary", "Boundary curve(s) for imagery", GH_ParamAccess.list);
+            pManager.AddIntegerParameter("Resolution", "resolution", "Maximum resolution for images",
+                GH_ParamAccess.item, 1024);
+            pManager.AddTextParameter("Target Folder", "folderPath", "Folder to save image files", GH_ParamAccess.item,
+                Path.GetTempPath());
+            pManager.AddTextParameter("Prefix", "prefix", "Prefix for image file name", GH_ParamAccess.item,
+                "restRaster");
+            pManager.AddTextParameter("REST URL", "URL",
+                "ArcGIS REST Service website to query. Use the component \nmenu item \"Create REST Raster Source List\" for some examples.",
+                GH_ParamAccess.item);
+            pManager.AddTextParameter("Image Type", "imageType", "Image file type to download from the service.  " +
+                                                                 "Some REST raster services have a range of available types including jpg, tif, png, png32, svg.",
+                GH_ParamAccess.item, "jpg");
+            pManager.AddBooleanParameter("Run", "run", "Go ahead and download imagery from the Service",
+                GH_ParamAccess.item, false);
+        }
 
-        pManager.AddTextParameter("User Spatial Reference System", "userSRS", "Custom SRS", GH_ParamAccess.item,"WGS84");
-        pManager.AddTextParameter("Image Type", "imageType", "Image file type to download from the service.", GH_ParamAccess.item, "jpg");
+        /// <summary>
+        /// Registers all the output parameters for this component.
+        /// </summary>
+        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        {
+            pManager.AddTextParameter("Image", "Image", "File location of downloaded image", GH_ParamAccess.tree);
+            pManager.AddCurveParameter("Image Frame", "imageFrame", "Bounding box of image for mapping to geometry",
+                GH_ParamAccess.tree);
+            pManager.AddTextParameter("REST Query", "RESTQuery", "Full text of REST query", GH_ParamAccess.tree);
+        }
 
-    }
-
-    /// <summary>
-    /// Registers all the output parameters for this component.
-    /// </summary>
-    protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
-    {
-        pManager.AddTextParameter("Image", "Image", "File location of downloaded image", GH_ParamAccess.tree);
-        pManager.AddCurveParameter("Image Frame", "imageFrame", "Bounding box of image for mapping to geometry", GH_ParamAccess.tree);
-        pManager.AddTextParameter("REST Query", "RESTQuery", "Full text of REST query", GH_ParamAccess.tree);
-    }
-
-    /// <summary>
-    /// This is the method that actually does the work.
-    /// </summary>
-    /// <param name="DA">The DA object can be used to retrieve data from input parameters and 
-    /// to store data in output parameters.</param>
-    protected override void SolveInstance(IGH_DataAccess DA)
-    {
-      List<Curve> boundary = new List<Curve>();
+        /// <summary>
+        /// This is the method that actually does the work.
+        /// </summary>
+        /// <param name="DA">The DA object can be used to retrieve data from input parameters and 
+        /// to store data in output parameters.</param>
+        protected override void SolveInstance(IGH_DataAccess DA)
+        {
+            List<Curve> boundary = new List<Curve>();
             DA.GetDataList<Curve>("Boundary", boundary);
 
             int Res = -1;
@@ -91,38 +79,43 @@ namespace TwinLand
 
             string folderPath = string.Empty;
             DA.GetData<string>("Target Folder", ref folderPath);
-            if (!folderPath.EndsWith(@"\")) { folderPath = folderPath + @"\"; }
+            if (!folderPath.EndsWith(@"\"))
+            {
+                folderPath = folderPath + @"\";
+            }
 
             string prefix = string.Empty;
             DA.GetData<string>("Prefix", ref prefix);
 
             string URL = string.Empty;
             DA.GetData<string>("REST URL", ref URL);
-            if (URL.EndsWith(@"/")) { URL = URL + "export?"; }
-
-            bool run = false;
-            DA.GetData<bool>("run", ref run);
-
-            string userSRStext = string.Empty;
-            DA.GetData<string>("User Spatial Reference System", ref userSRStext);
+            if (URL.EndsWith(@"/"))
+            {
+                URL = URL + "export?";
+            }
 
             string imageType = string.Empty;
             DA.GetData<string>("Image Type", ref imageType);
 
+            bool run = false;
+            DA.GetData<bool>("Run", ref run);
+
             ///GDAL setup
             RESTful.GdalConfiguration.ConfigureOgr();
+            RESTful.GdalConfiguration.ConfigureGdal();
 
-            OSGeo.OSR.SpatialReference userSRS = new OSGeo.OSR.SpatialReference("");
-            userSRS.SetFromUserInput(userSRStext);
-            int userSRSInt = Int16.Parse(userSRS.GetAuthorityCode(null));
+            ///Set transform from input spatial reference to TwinLand spatial reference
+            ///TODO: verify the userSRS is valid
+            OSGeo.OSR.SpatialReference twinLandSRS = new OSGeo.OSR.SpatialReference("");
+            twinLandSRS.SetFromUserInput(TwinLandSRS.Instance.SRS);
+            AddRuntimeMessage(GH_RuntimeMessageLevel.Remark,
+                "TwinLand's Spatial Spatial Reference System (SRS): " + TwinLandSRS.Instance.SRS);
+            int twinLandSRSInt = Int16.Parse(twinLandSRS.GetAuthorityCode(null));
+            Message = "EPSG:" + twinLandSRSInt;
 
-            ///Set transform from input spatial reference to Rhino spatial reference
-            OSGeo.OSR.SpatialReference rhinoSRS = new OSGeo.OSR.SpatialReference("");
-            rhinoSRS.SetWellKnownGeogCS("WGS84");
-
-            ///This transform moves and scales the points required in going from userSRS to XYZ and vice versa
-            Transform userSRSToModelTransform = TwinLand.Convert.GetUserSRSToModelTransform(userSRS);
-            Transform modelToUserSRSTransform = TwinLand.Convert.GetModelToUserSRSTransform(userSRS);
+            ///Apply EAP to TwinLandSRS
+            Transform userSRSToModelTransform = TwinLand.Convert.GetUserSRSToTwinLandSRSTransform(twinLandSRS);
+            Transform twinLandToUserSRSTransform = TwinLand.Convert.GetTwinLandSRSToUserSRSTransform(twinLandSRS);
 
 
             GH_Structure<GH_String> mapList = new GH_Structure<GH_String>();
@@ -133,99 +126,164 @@ namespace TwinLand
             file.Directory.Create();
 
             string size = string.Empty;
-            if (Res != 0)
+            if (Res > 0)
             {
                 size = "&size=" + Res + "%2C" + Res;
             }
 
             for (int i = 0; i < boundary.Count; i++)
             {
-
                 GH_Path path = new GH_Path(i);
 
                 ///Get image frame for given boundary
                 BoundingBox imageBox = boundary[i].GetBoundingBox(false);
-                imageBox.Transform(modelToUserSRSTransform);
+                imageBox.Transform(twinLandToUserSRSTransform);
+
+                double proportion = imageBox.Diagonal.X / imageBox.Diagonal.Y;
+                if (proportion > 1)
+                {
+                    size = "&size=" + Res + "%2C" + Res / proportion;
+                }
+                else
+                {
+                    size = "&size=" + Res * proportion + "%2C" + Res;
+                }
 
                 ///Make sure to have a rect for output
-                Rectangle3d rect = BBoxToRect(imageBox);
+                Rectangle3d rect = new Rectangle3d();
 
                 ///Query the REST service
                 string restquery = URL +
-                  ///legacy method for creating bounding box string
-                  "bbox=" + imageBox.Min.X + "%2C" + imageBox.Min.Y + "%2C" + imageBox.Max.X + "%2C" + imageBox.Max.Y +
-                  "&bboxSR=" + userSRSInt +
-                  size + //"&layers=&layerdefs=" +
-                  "&imageSR=" + userSRSInt + //"&transparent=false&dpi=&time=&layerTimeOptions=" +
-                  "&format=" + imageType;// +
-                  //"&f=json";
+                                   ///legacy method for creating bounding box string
+                                   "bbox=" + imageBox.Min.X + "%2C" + imageBox.Min.Y + "%2C" + imageBox.Max.X + "%2C" +
+                                   imageBox.Max.Y +
+                                   "&bboxSR=" + twinLandSRSInt +
+                                   size + //"&layers=&layerdefs=" +
+                                   "&imageSR=" + twinLandSRSInt + //"&transparent=false&dpi=&time=&layerTimeOptions=" +
+                                   "&format=" + imageType;
                 string restqueryJSON = restquery + "&f=json";
                 string restqueryImage = restquery + "&f=image";
 
                 mapquery.Append(new GH_String(restqueryImage), path);
 
                 string result = string.Empty;
-
-                    ///Get extent of image from arcgis rest service as JSON
-                    result = TwinLand.Convert.HttpToJson(restqueryJSON);
-                    JObject jObj = JsonConvert.DeserializeObject<JObject>(result);
-                    if (!jObj.ContainsKey("href"))
-                    {
-                        restqueryJSON = restqueryJSON.Replace("export?", "exportImage?");
-                        restqueryImage = restqueryImage.Replace("export?", "exportImage?");
-                        mapquery.RemovePath(path);
-                        mapquery.Append(new GH_String(restqueryImage), path);
-                        result = TwinLand.Convert.HttpToJson(restqueryJSON);
-                        jObj = JsonConvert.DeserializeObject<JObject>(result);
-                    }
+                string imageTypeShort = imageType;
 
                 if (run)
                 {
-                    Point3d extMin = new Point3d((double)jObj["extent"]["xmin"], (double)jObj["extent"]["ymin"], 0);
-                    Point3d extMax = new Point3d((double)jObj["extent"]["xmax"], (double)jObj["extent"]["ymax"], 0);
-                    rect = new Rectangle3d(Plane.WorldXY, extMin, extMax);
-                    rect.Transform(userSRSToModelTransform);
-
-                    ///Download image from source
-                    ///Catch if JSON query throws an error
-                    string imageQueryJSON = jObj["href"].ToString();
-                    using (WebClient webC = new WebClient())
+                    ///Get extent of image from arcgis rest service as JSON
+                    try
                     {
-                        try 
-                        {
-                            if (!String.IsNullOrEmpty(imageQueryJSON))
-                            {
-                                webC.DownloadFile(imageQueryJSON, folderPath + prefix + "_" + i + "." + imageType);
-                                webC.Dispose();
-                            }
-                            else
-                            {
-                                webC.DownloadFile(restqueryImage, folderPath + prefix + "_" + i + "." + imageType);
-                                webC.Dispose();
-                            }
+                        result = TwinLand.Convert.HttpToJson(restqueryJSON);
 
-                        }
-                        catch
+                        JObject jObj = JsonConvert.DeserializeObject<JObject>(result);
+                        if (!jObj.ContainsKey("href"))
                         {
-                            webC.DownloadFile(restqueryImage, folderPath + prefix + "_" + i + "." + imageType);
-                            webC.Dispose();
+                            restqueryJSON = restqueryJSON.Replace("export?", "exportImage?");
+                            restqueryImage = restqueryImage.Replace("export?", "exportImage?");
+                            mapquery.RemovePath(path);
+                            mapquery.Append(new GH_String(restqueryImage), path);
+                            result = TwinLand.Convert.HttpToJson(restqueryJSON);
+                            jObj = JsonConvert.DeserializeObject<JObject>(result);
+                        }
+
+                        if (jObj["extent"] != null)
+                        {
+                            Point3d extMin = new Point3d((double)jObj["extent"]["xmin"], (double)jObj["extent"]["ymin"],
+                                0);
+                            Point3d extMax = new Point3d((double)jObj["extent"]["xmax"], (double)jObj["extent"]["ymax"],
+                                0);
+                            rect = new Rectangle3d(Plane.WorldXY, extMin, extMax);
+                            rect.Transform(userSRSToModelTransform);
+                        }
+
+                        ///Download image from source
+                        ///Catch if JSON query throws an error
+                        string imageQueryJSON = "";
+                        if (jObj["href"] != null)
+                        {
+                            imageQueryJSON = jObj["href"].ToString();
+                        }
+
+                        ///Clean up file name for png32 png16 png8 geotiff tiff
+
+                        if (imageTypeShort.EndsWith("32"))
+                        {
+                            imageTypeShort = imageTypeShort.Remove(imageTypeShort.LastIndexOf("32"));
+                        }
+
+                        if (imageTypeShort.EndsWith("16"))
+                        {
+                            imageTypeShort = imageTypeShort.Remove(imageTypeShort.LastIndexOf("16"));
+                        }
+
+                        if (imageTypeShort.EndsWith("8"))
+                        {
+                            imageTypeShort = imageTypeShort.Remove(imageTypeShort.LastIndexOf("8"));
+                        }
+
+                        if (imageTypeShort.EndsWith("geotiff", true, null))
+                        {
+                            imageTypeShort = imageTypeShort.Remove(imageTypeShort.LastIndexOf("geotiff"));
+                            imageTypeShort = imageTypeShort + "tif";
+                        }
+
+                        if (imageTypeShort.EndsWith("tiff", true, null))
+                        {
+                            imageTypeShort = imageTypeShort.Remove(imageTypeShort.LastIndexOf("tiff"));
+                            imageTypeShort = imageTypeShort + "tif";
+                        }
+
+                        ///If the image link from the JSON response doesn't work, fallback to the original image REST query
+                        ///Replaces the WebClient process from original RESTRaster component with HttpWebResponse
+                        string imageDownloaded = "";
+
+                        if (!String.IsNullOrEmpty(imageQueryJSON))
+                        {
+                            imageDownloaded = TwinLand.Convert.DownloadHttpImage(imageQueryJSON,
+                                folderPath + prefix + "_" + i + "." + imageTypeShort);
+                            if (!String.IsNullOrEmpty(imageDownloaded))
+                            {
+                                imageDownloaded = TwinLand.Convert.DownloadHttpImage(restqueryImage,
+                                    folderPath + prefix + "_" + i + "." + imageTypeShort);
+                            }
+                        }
+                        else
+                        {
+                            imageDownloaded = TwinLand.Convert.DownloadHttpImage(restqueryImage,
+                                folderPath + prefix + "_" + i + "." + imageTypeShort);
+                        }
+
+                        if (!String.IsNullOrEmpty(imageDownloaded))
+                        {
+                            AddRuntimeMessage(GH_RuntimeMessageLevel.Error, imageDownloaded);
                         }
                     }
+                    catch (Exception e)
+                    {
+                        AddRuntimeMessage(GH_RuntimeMessageLevel.Error, e.Message);
+                        DA.SetDataTree(2, mapquery);
+                        return;
+                    }
 
+
+                    var bitmapPath = folderPath + prefix + "_" + i + "." + imageTypeShort;
+                    mapList.Append(new GH_String(bitmapPath), path);
+
+                    if (rect.IsValid)
+                    {
+                        imgFrame.Append(new GH_Rectangle(rect), path);
+                        AddPreviewItem(bitmapPath, rect);
+                    }
                 }
-                var bitmapPath = folderPath + prefix + "_" + i + "." + imageType;
-                mapList.Append(new GH_String(bitmapPath), path);
-
-                imgFrame.Append(new GH_Rectangle(rect), path);
-                AddPreviewItem(bitmapPath, rect);
             }
 
             DA.SetDataTree(0, mapList);
             DA.SetDataTree(1, imgFrame);
             DA.SetDataTree(2, mapquery);
-    }
-    
-    private JObject rasterJson = JObject.Parse(TwinLand.Convert.GetEndpoints());
+        }
+
+        private JObject rasterJson = JObject.Parse(TwinLand.Convert.GetEndpoints());
 
         /// <summary>
         /// Adds to the context menu an option to create a pre-populated list of common REST Raster sources
@@ -238,7 +296,8 @@ namespace TwinLand
             List<string> rasterSources = rasterSourcesJson.Values<string>().ToList();
             foreach (var src in rasterSourcesJson)
             {
-                ToolStripMenuItem root = GH_DocumentObject.Menu_AppendItem(menu, "Create " + src.ToString() + " Source List", CreateRasterList);
+                ToolStripMenuItem root = GH_DocumentObject.Menu_AppendItem(menu,
+                    "Create " + src.ToString() + " Source List", CreateRasterList);
                 root.ToolTipText = "Click this to create a pre-populated list of some " + src.ToString() + " sources.";
                 base.AppendAdditionalMenuItems(menu);
             }
@@ -268,24 +327,25 @@ namespace TwinLand
             {
                 if (service["source"].ToString() == source)
                 {
-                    GH_ValueListItem vi = new GH_ValueListItem(service["service"].ToString(), String.Format("\"{0}\"", service["url"].ToString()));
+                    GH_ValueListItem vi = new GH_ValueListItem(service["service"].ToString(),
+                        String.Format("\"{0}\"", service["url"].ToString()));
                     vl.ListItems.Add(vi);
                 }
             }
 
             ///Set component nickname
             vl.NickName = source;
-            
+
             ///Get active GH doc
             GH_Document doc = OnPingDocument();
             if (docIO.Document == null) return;
-            
+
             ///Place the object
             docIO.Document.AddObject(vl, false, 1);
-            
+
             ///Get the pivot of the "URL" param
             PointF currPivot = Params.Input[4].Attributes.Pivot;
-            
+
             ///Set the pivot of the new object
             vl.Attributes.Pivot = new PointF(currPivot.X - 400, currPivot.Y - 11);
 
@@ -298,28 +358,28 @@ namespace TwinLand
             doc.MergeDocument(docIO.Document);
         }
 
-    /// <summary>
-    /// Provides an Icon for every component that will be visible in the User Interface.
-    /// Icons need to be 24x24 pixels.
-    /// </summary>
-    protected override System.Drawing.Bitmap Icon
-    {
-      get
-      { 
-        // You can add image files to your project resources and access them like this:
-        //return Resources.IconForThisComponent;
-        return Properties.Resources.T_icon;
-      }
-    }
+        /// <summary>
+        /// Provides an Icon for every component that will be visible in the User Interface.
+        /// Icons need to be 24x24 pixels.
+        /// </summary>
+        protected override System.Drawing.Bitmap Icon
+        {
+            get
+            {
+                // You can add image files to your project resources and access them like this:
+                //return Resources.IconForThisComponent;
+                return Properties.Resources.T_icon;
+            }
+        }
 
-    /// <summary>
-    /// Each component must have a unique Guid to identify it. 
-    /// It is vital this Guid doesn't change otherwise old ghx files 
-    /// that use the old ID will partially fail during loading.
-    /// </summary>
-    public override Guid ComponentGuid
-    {
-      get { return new Guid("40b20102-1867-4654-9aa3-4ec1535d2f6b"); }
+        /// <summary>
+        /// Each component must have a unique Guid to identify it. 
+        /// It is vital this Guid doesn't change otherwise old ghx files 
+        /// that use the old ID will partially fail during loading.
+        /// </summary>
+        public override Guid ComponentGuid
+        {
+            get { return new Guid("b91d9561-5be3-4ae6-b71d-235c64cd6df1"); }
+        }
     }
-  }
 }
