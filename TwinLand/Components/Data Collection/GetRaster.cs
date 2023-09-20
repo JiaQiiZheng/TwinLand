@@ -37,10 +37,10 @@ using TwinLand;
 
 namespace TwinLand
 {
-    public class RESTRaster : TwinLandRasterPreviewComponent
+    public class GetRaster : TwinLandRasterPreviewComponent
     {
         //Class Constructor
-        public RESTRaster() : base("GetRaster", "GetRaster", "Get raster imagery from ArcGIS REST Services", "REST")
+        public GetRaster() : base("GetRaster", "GetRaster", "Get raster imagery from ArcGIS REST Services", "Data Collection")
         {
 
         }
@@ -58,13 +58,12 @@ namespace TwinLand
             // optional(preset) input
             pManager.AddTextParameter("Spatial Reference System", "customSRS", "Customize your Spatial Reference System by standard SRS code", GH_ParamAccess.item,"WGS84");
             pManager.AddTextParameter("ImageType", "imageType", "Set image type for the request to the REST server", GH_ParamAccess.item, "jpg");
-            
         }
 
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             pManager.AddTextParameter("ImagePath", "ImagePath", "Full path of downloaded raster images", GH_ParamAccess.tree);
-            pManager.AddCurveParameter("ImageFrame", "imageFrame", "The image frame after projection of the downloaded raster image", GH_ParamAccess.tree);
+            pManager.AddCurveParameter("ImageExtent", "imageExtent", "The original frame of the downloaded raster image before projection", GH_ParamAccess.tree);
             pManager.AddTextParameter("REST_query", "REST_query", "REST query string of the REST request", GH_ParamAccess.tree);
         }
 
@@ -113,6 +112,7 @@ namespace TwinLand
             OSGeo.OSR.SpatialReference customSRS = new OSGeo.OSR.SpatialReference("");
             customSRS.SetFromUserInput(SRS_code);
             int userSRSInt = Int16.Parse(customSRS.GetAuthorityCode(null));
+            Console.WriteLine(userSRSInt);
 
             ///Set transform from input spatial reference to Rhino spatial reference
             OSGeo.OSR.SpatialReference rhinoSRS = new OSGeo.OSR.SpatialReference("");
@@ -215,7 +215,6 @@ namespace TwinLand
                 mapList.Append(new GH_String(bitmapPath), path);
 
                 imgFrame.Append(new GH_Rectangle(rect), path);
-                Console.WriteLine(bitmapPath);
                 AddPreviewItem(bitmapPath, rect);
             }
 

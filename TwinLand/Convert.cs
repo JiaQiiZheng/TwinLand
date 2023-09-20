@@ -42,6 +42,22 @@ namespace TwinLand
             point.Transform(XYZToWGSTransform());
             return point;
         }
+        
+        public static Point3d ToWGS(Point3d xyz)
+        {
+            EarthAnchorPoint eap = new EarthAnchorPoint();
+            eap = Rhino.RhinoDoc.ActiveDoc.EarthAnchorPoint;
+            Rhino.UnitSystem us = new Rhino.UnitSystem();
+            Transform xf = eap.GetModelToEarthTransform(us);
+
+            xyz = xyz * Rhino.RhinoMath.UnitScale(Rhino.RhinoDoc.ActiveDoc.ModelUnitSystem, Rhino.UnitSystem.Meters);
+            Point3d ptON = new Point3d(xyz.X, xyz.Y, xyz.Z);
+            ptON = xf * ptON;
+
+            ///TODO: Make translation of ptON here using SetCRS global variable (WGS84 -> CRS)
+
+            return ptON;
+        }
 
         public static Transform XYZToWGSTransform()
         {
@@ -68,6 +84,9 @@ namespace TwinLand
         
         public static Transform GetUserSRSToModelTransform(OSGeo.OSR.SpatialReference userSRS)
         {
+            ///TODO: Check what units the userSRS is in and coordinate with the scaling function.  Currently only accounts for a userSRS in meters.
+            ///TODO: translate or scale GCS (decimal degrees) to something like a Projectected Coordinate System.  Need to go dd to xy
+
             ///transform rhino EAP from rhinoSRS to userSRS
             double eapLat = EarthAnchorPoint.EarthBasepointLatitude;
             double eapLon = EarthAnchorPoint.EarthBasepointLongitude;
@@ -77,13 +96,8 @@ namespace TwinLand
             OSGeo.OSR.SpatialReference rhinoSRS = new OSGeo.OSR.SpatialReference("");
             rhinoSRS.SetWellKnownGeogCS("WGS84");
 
-
-            OSGeo.OSR.SpatialReference heronSRS = new OSGeo.OSR.SpatialReference("");
-            heronSRS.SetFromUserInput(TwinLandSRS.Instance.SRS);
-            var units = heronSRS.GetLinearUnits();
-
             OSGeo.OSR.CoordinateTransformation coordTransform = new OSGeo.OSR.CoordinateTransformation(rhinoSRS, userSRS);
-            //OSGeo.OGR.Geometry userAnchorPointDD = TwinLand.Convert.Point3dToOgrPoint(new Point3d(eapLon, eapLat, eapElev));
+            //OSGeo.OGR.Geometry userAnchorPointDD = Heron.Convert.Point3dToOgrPoint(new Point3d(eapLon, eapLat, eapElev));
             OSGeo.OGR.Geometry userAnchorPointDD = new OSGeo.OGR.Geometry(wkbGeometryType.wkbPoint);
             userAnchorPointDD.AddPoint(eapLon, eapLat, eapElev);
             Transform t = new Transform(1.0);
@@ -96,11 +110,11 @@ namespace TwinLand
             double eapLatNorth = EarthAnchorPoint.EarthBasepointLatitude + 0.5;
             double eapLonEast = EarthAnchorPoint.EarthBasepointLongitude + 0.5;
 
-            //OSGeo.OGR.Geometry userAnchorPointDDNorth = TwinLand.Convert.Point3dToOgrPoint(new Point3d(eapLon, eapLatNorth, eapElev));
+            //OSGeo.OGR.Geometry userAnchorPointDDNorth = Heron.Convert.Point3dToOgrPoint(new Point3d(eapLon, eapLatNorth, eapElev));
             OSGeo.OGR.Geometry userAnchorPointDDNorth = new OSGeo.OGR.Geometry(wkbGeometryType.wkbPoint);
             userAnchorPointDDNorth.AddPoint(eapLon, eapLatNorth, eapElev);
 
-            //OSGeo.OGR.Geometry userAnchorPointDDEast = TwinLand.Convert.Point3dToOgrPoint(new Point3d(eapLonEast, eapLat, eapElev));
+            //OSGeo.OGR.Geometry userAnchorPointDDEast = Heron.Convert.Point3dToOgrPoint(new Point3d(eapLonEast, eapLat, eapElev));
             OSGeo.OGR.Geometry userAnchorPointDDEast = new OSGeo.OGR.Geometry(wkbGeometryType.wkbPoint);
             userAnchorPointDDEast.AddPoint(eapLonEast, eapLat, eapElev);
 
@@ -135,7 +149,7 @@ namespace TwinLand
 
             return shiftScale;
         }
-        
+
         public static Transform GetModelToUserSRSTransform(OSGeo.OSR.SpatialReference userSRS)
         {
             var xyzToUserSRS = GetUserSRSToModelTransform(userSRS);
@@ -154,18 +168,18 @@ namespace TwinLand
             OSGeo.OSR.SpatialReference rhinoSRS = new OSGeo.OSR.SpatialReference("");
             rhinoSRS.SetWellKnownGeogCS("WGS84");
 
-            OSGeo.OSR.SpatialReference heronSRS = new OSGeo.OSR.SpatialReference("");
-            heronSRS.SetFromUserInput(TwinLandSRS.Instance.SRS);
+            OSGeo.OSR.SpatialReference twinLandSRS = new OSGeo.OSR.SpatialReference("");
+            twinLandSRS.SetFromUserInput(TwinLandSRS.Instance.SRS);
             var unitsToMeters = userSRS.GetLinearUnits();
 
-            OSGeo.OSR.CoordinateTransformation coordTransform = new OSGeo.OSR.CoordinateTransformation(rhinoSRS, heronSRS);
+            OSGeo.OSR.CoordinateTransformation coordTransform = new OSGeo.OSR.CoordinateTransformation(rhinoSRS, twinLandSRS);
             OSGeo.OGR.Geometry userAnchorPointDD = new OSGeo.OGR.Geometry(wkbGeometryType.wkbPoint);
             userAnchorPointDD.AddPoint(EarthAnchorPoint.EarthBasepointLongitude, EarthAnchorPoint.EarthBasepointLatitude, EarthAnchorPoint.EarthBasepointElevation);
             Transform t = new Transform(1.0);
 
             userAnchorPointDD.Transform(coordTransform);
 
-            OSGeo.OSR.CoordinateTransformation coordTransformHeronSRStoUserSRS = new OSGeo.OSR.CoordinateTransformation(heronSRS, userSRS);
+            OSGeo.OSR.CoordinateTransformation coordTransformHeronSRStoUserSRS = new OSGeo.OSR.CoordinateTransformation(twinLandSRS, userSRS);
             userAnchorPointDD.Transform(coordTransformHeronSRStoUserSRS);
 
 
@@ -217,6 +231,35 @@ namespace TwinLand
             pt3d.Transform(transform);
             
             return pt3d;
+        }
+        
+        /// <summary>
+        /// transform by math
+        /// </summary>
+        /// <param name="lon"></param>
+        /// <param name="spatRef"></param>
+        /// <returns></returns>
+        public static double ConvertLon(double lon, int spatRef)
+        {
+            double clon = lon;
+            if (spatRef == 3857)
+            {
+                double y = Math.Log(Math.Tan((90 + lon) * Math.PI / 360)) / (Math.PI / 180);
+                y = y * 20037508.34 / 180;
+                clon = y;
+            }
+            return clon;
+        }
+
+        public static double ConvertLat(double lat, int spatRef)
+        {
+            double clat = lat;
+            if (spatRef == 3857)
+            {
+                double x = lat * 20037508.34 / 180;
+                clat = x;
+            }
+            return clat;
         }
         
         //////////////////////////////////////////////////////

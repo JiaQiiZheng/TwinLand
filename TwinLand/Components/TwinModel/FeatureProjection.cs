@@ -18,7 +18,7 @@ namespace TwinLand
     /// </summary>
     public FeatureProjection()
       : base("FeatureProjection", "Nickname",
-        "FeatureProjection description", "TwinModeling")
+        "FeatureProjection description", "TwinModel")
     {
     }
 

@@ -26,9 +26,9 @@ namespace TwinLand
         /// new tabs/panels will automatically be created.
         /// </summary>
         public GetGeocode()
-            : base("RESTGeocode", "RESTGeocode",
-                "RESTGeocode",
-                 "REST")
+            : base("GetGeocode", "GetGeocode",
+                "GetGeocode",
+                 "Data Collection")
         {
         }
 
@@ -38,7 +38,7 @@ namespace TwinLand
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddTextParameter("Addresses", "addresses",
-                "convert POI or addresses to RESTGeocode by ESRI service", GH_ParamAccess.tree);
+                "convert POI or addresses to GetGeocode by ESRI service", GH_ParamAccess.tree);
         }
 
         /// <summary>

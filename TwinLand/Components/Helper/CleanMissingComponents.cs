@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-
+using System.ComponentModel;
+using System.Linq;
 using Grasshopper;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
@@ -17,8 +18,8 @@ namespace TwinLand
     /// new tabs/panels will automatically be created.
     /// </summary>
     public CleanMissingComponents()
-      : base("CleanMissingComponents", "Nickname",
-        "CleanMissingComponents description", "Utils")
+      : base("CleanMissingComponents", "CleanMissingComponents",
+        "Clean all missing components on canvas", "Helper")
     {
     }
 
@@ -27,6 +28,8 @@ namespace TwinLand
     /// </summary>
     protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
     {
+      pManager.AddBooleanParameter("Run", "run", "Run and clean all missing components on canvas",
+        GH_ParamAccess.item, false);
     }
 
     /// <summary>
@@ -43,6 +46,19 @@ namespace TwinLand
     /// to store data in output parameters.</param>
     protected override void SolveInstance(IGH_DataAccess DA)
     {
+      bool run = false;
+      DA.GetData("Run", ref run);
+      
+      GH_Document ghDoc = this.OnPingDocument();
+      List<IGH_DocumentObject> objs = new List<IGH_DocumentObject>(ghDoc.Objects);
+      var trash = ghDoc.Objects.Where(o =>
+        o.GetType().ToString() == "Grasshopper.Kernel.Components.GH_PlaceholderComponent").ToList();
+
+      if (run)
+      {
+        if(trash.Count == 0) return;
+        ghDoc.ScheduleSolution(20, d => { ghDoc.RemoveObjects(trash, false);});
+      }
     }
 
     /// <summary>
@@ -55,7 +71,7 @@ namespace TwinLand
       { 
         // You can add image files to your project resources and access them like this:
         //return Resources.IconForThisComponent;
-        return null;
+        return Properties.Resources.T_icon;
       }
     }
 

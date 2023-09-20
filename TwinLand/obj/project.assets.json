@@ -410,6 +410,7 @@
       "type": "package",
       "path": "gdal/2.4.4",
       "files": [
+        ".DS_Store",
         ".nupkg.metadata",
         ".signature.p7s",
         "content/GdalConfiguration.cs.pp",
@@ -418,6 +419,7 @@
         "contentFiles/vb/any/GdalConfiguration.vb.pp",
         "gdal.2.4.4.nupkg.sha512",
         "gdal.nuspec",
+        "lib/.DS_Store",
         "lib/net40/gdal_csharp.dll",
         "lib/net40/gdalconst_csharp.dll",
         "lib/net40/ogr_csharp.dll",

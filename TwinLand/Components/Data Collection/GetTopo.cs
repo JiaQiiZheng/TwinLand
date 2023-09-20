@@ -27,7 +27,7 @@ namespace TwinLand
     /// </summary>
     public GetTopo()
       : base("GetTopo", "GetTopo",
-        "Get Topography based on DEM data from services ", "REST")
+        "Get Topography based on DEM data from services ", "Data Collection")
     {
     }
 

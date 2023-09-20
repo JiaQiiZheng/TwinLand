@@ -30,6 +30,8 @@
 using System;
 using System.IO;
 using System.Reflection;
+using OsmSharp.Complete;
+using TwinLand;
 using Gdal = OSGeo.GDAL.Gdal;
 using Ogr = OSGeo.OGR.Ogr;
 
@@ -55,15 +57,13 @@ namespace RESTful
         static GdalConfiguration()
         {
             var executingAssemblyFile = new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath;
-            var executingDirectory = Path.Combine(Path.GetDirectoryName(executingAssemblyFile), "net48");
+            var executingDirectory = Path.Combine(Path.GetDirectoryName(executingAssemblyFile));
 
             if (string.IsNullOrEmpty(executingDirectory))
                 throw new InvalidOperationException("cannot get executing directory");
 
-
             var gdalPath = Path.Combine(executingDirectory, "gdal");
             var nativePath = Path.Combine(gdalPath, GetPlatform());
-
 
             // Prepend native path to environment path, to ensure the
             // right libs are being used.
@@ -76,9 +76,9 @@ namespace RESTful
             Environment.SetEnvironmentVariable("GDAL_DATA", gdalData);
             Gdal.SetConfigOption("GDAL_DATA", gdalData);
 
-            var driverPath = Path.Combine(nativePath, "plugins");
-            Environment.SetEnvironmentVariable("GDAL_DRIVER_PATH", driverPath);
-            Gdal.SetConfigOption("GDAL_DRIVER_PATH", driverPath);
+            // var driverPath = Path.Combine(nativePath, "plugins");
+            // Environment.SetEnvironmentVariable("GDAL_DRIVER_PATH", driverPath);
+            // Gdal.SetConfigOption("GDAL_DRIVER_PATH", driverPath);
 
             Environment.SetEnvironmentVariable("GEOTIFF_CSV", gdalData);
             Gdal.SetConfigOption("GEOTIFF_CSV", gdalData);
@@ -99,7 +99,6 @@ namespace RESTful
             // Register drivers
             Ogr.RegisterAll();
             _configuredOgr = true;
-
             PrintDriversOgr();
         }
 

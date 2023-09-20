@@ -20,7 +20,7 @@ namespace TwinLand
     /// </summary>
     public SetEarthAnchorPoint()
       : base("SetEarthAnchorPoint", "setEAP",
-        "SetEarthAnchorPoint base on latitude and longitude ", "GIS tools")
+        "SetEarthAnchorPoint base on latitude and longitude ", "GIS")
     {
     }
 

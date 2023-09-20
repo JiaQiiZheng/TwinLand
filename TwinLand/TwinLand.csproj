@@ -68,9 +68,27 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Reference Include="gdalconst_csharp">
+        <HintPath>..\..\..\..\..\.nuget\packages\gdal\2.4.4\lib\net40\gdalconst_csharp.dll</HintPath>
+      </Reference>
+      <Reference Include="gdal_csharp">
+        <HintPath>..\..\..\..\..\.nuget\packages\gdal\2.4.4\lib\net40\gdal_csharp.dll</HintPath>
+      </Reference>
+      <Reference Include="ogr_csharp">
+        <HintPath>..\..\..\..\..\.nuget\packages\gdal\2.4.4\lib\net40\ogr_csharp.dll</HintPath>
+      </Reference>
+      <Reference Include="osr_csharp">
+        <HintPath>..\..\..\..\..\.nuget\packages\gdal\2.4.4\lib\net40\osr_csharp.dll</HintPath>
+      </Reference>
       <Reference Include="System.Windows.Forms">
         <HintPath>..\..\..\..\..\.nuget\packages\microsoft.netframework.referenceassemblies.net48\1.0.3\build\.NETFramework\v4.8\System.Windows.Forms.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Components\Export\" />
+      <Folder Include="Components\FleX AgentBuilder\" />
+      <Folder Include="Components\FleX Solver\" />
     </ItemGroup>
     
 </Project>

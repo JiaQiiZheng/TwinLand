@@ -7,7 +7,7 @@ using Rhino.Geometry;
 
 namespace TwinLand
 {
-  public class GetAllParticles : GH_Component
+  public class GetAllParticles : TwinLandComponent
   {
     /// <summary>
     /// Each implementation of GH_Component must provide a public 
@@ -18,8 +18,7 @@ namespace TwinLand
     /// </summary>
     public GetAllParticles()
       : base("GetAllParticles", "Nickname",
-        "GetAllParticles description",
-        "Category", "Subcategory")
+        "GetAllParticles description",  "Subcategory")
     {
     }
 

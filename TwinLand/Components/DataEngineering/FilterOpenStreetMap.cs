@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using Grasshopper;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Data;
+using Grasshopper.Kernel.Types;
+using OsmSharp;
+using OsmSharp.Complete;
 using Rhino.Geometry;
 
 namespace TwinLand
 {
-  public class FilterOpenStreetMap : GH_Component
+  public class FilterOpenStreetMap : TwinLandComponent
   {
     /// <summary>
     /// Each implementation of GH_Component must provide a public 
@@ -17,9 +21,8 @@ namespace TwinLand
     /// new tabs/panels will automatically be created.
     /// </summary>
     public FilterOpenStreetMap()
-      : base("FilterOpenStreetMap", "Nickname",
-        "FilterOpenStreetMap description",
-        "Category", "Subcategory")
+      : base("FilterOpenStreetMap", "FilterOSM",
+        "Filter OpenStreetMap by input 'Key=Value' expression", "Data Engineering")
     {
     }
 
@@ -28,6 +31,11 @@ namespace TwinLand
     /// </summary>
     protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
     {
+      pManager.AddGeometryParameter("FeatureGeometry", "featureGeometry", "Feature geometry from OpenStreetMap file",
+        GH_ParamAccess.tree);
+      pManager.AddTextParameter("Values", "values", "Data value list of each feature geometry", GH_ParamAccess.tree);
+      pManager.AddTextParameter("OSM_Tag_Key = Value", "OSM_Tag_Key = Value",
+        "String value used to filter the osm data, format like 'natural=water'", GH_ParamAccess.item);
     }
 
     /// <summary>
@@ -35,6 +43,7 @@ namespace TwinLand
     /// </summary>
     protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
     {
+      pManager.AddGeometryParameter("Filtered", "filtered", "Filtered feature geometry", GH_ParamAccess.tree);
     }
 
     /// <summary>
@@ -44,6 +53,35 @@ namespace TwinLand
     /// to store data in output parameters.</param>
     protected override void SolveInstance(IGH_DataAccess DA)
     {
+      string matchExpression = string.Empty;
+      DA.GetData("OSM_Tag_Key = Value", ref matchExpression);
+      
+      GH_Structure<IGH_GeometricGoo> geoFeatures = new GH_Structure<IGH_GeometricGoo>();
+      DA.GetDataTree("FeatureGeometry", out geoFeatures);
+
+      GH_Structure<GH_String> values = new GH_Structure<GH_String>(); 
+      DA.GetDataTree("Values", out values);
+
+      // split the expression to match key
+      string matchKey = matchExpression.Split('=')[1];
+      var paths = values.Paths;
+      // declare a new data tree to contain features
+      GH_Structure<IGH_GeometricGoo> newGeo = new GH_Structure<IGH_GeometricGoo>();
+      for (int i = 0; i < values.Branches.Count(); i++)
+      {
+        foreach (var key in values[i])
+        {
+          if (key.Value.Equals(matchKey))
+          {
+            foreach (var geo in geoFeatures[i])
+            {
+              newGeo.Append(geo, paths[i]);
+            }
+          }
+        }
+      }
+
+      DA.SetDataTree(0, newGeo);
     }
 
     /// <summary>
@@ -56,7 +94,7 @@ namespace TwinLand
       { 
         // You can add image files to your project resources and access them like this:
         //return Resources.IconForThisComponent;
-        return null;
+        return Properties.Resources.T_icon;
       }
     }
 

@@ -8,7 +8,7 @@ using TwinLand.Properties;
 
 namespace TwinLand
 {
-  public class DeconstructLocation : TwinLandComponent
+  public class DeconstructDecimalDegrees : TwinLandComponent
   {
     /// <summary>
     /// Each implementation of GH_Component must provide a public 
@@ -17,9 +17,9 @@ namespace TwinLand
     /// Subcategory the panel. If you use non-existing tab or panel names, 
     /// new tabs/panels will automatically be created.
     /// </summary>
-    public DeconstructLocation()
-      : base("DeconstructLocation", "DeconstructLocation",
-        "Deconstruct location to Latitude and Longitude", "Helper")
+    public DeconstructDecimalDegrees()
+      : base("DeconstructDecimalDegrees", "DeconstructDecimalDegrees",
+        "Deconstruct address decimal degrees to Latitude and Longitude", "Helper")
     {
     }
 
@@ -28,7 +28,7 @@ namespace TwinLand
     /// </summary>
     protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
     {
-      pManager.AddTextParameter("Location", "location", "The location with latitude and longitude",
+      pManager.AddTextParameter("DecimalDegrees", "DD", "The address decimal degrees",
         GH_ParamAccess.item);
     }
 
@@ -37,8 +37,8 @@ namespace TwinLand
     /// </summary>
     protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
     {
-      pManager.AddTextParameter("Latitude", "LAT", "Latitude", GH_ParamAccess.item);
-      pManager.AddTextParameter("Longitude", "LON", "Longitude", GH_ParamAccess.item);
+      pManager.AddTextParameter("Latitude", "latitude", "Latitude from decimal degrees", GH_ParamAccess.item);
+      pManager.AddTextParameter("Longitude", "longitude", "Longitude from decimal degrees", GH_ParamAccess.item);
     }
 
     /// <summary>

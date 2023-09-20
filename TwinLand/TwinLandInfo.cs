@@ -7,7 +7,7 @@ namespace TwinLand
 {
   public class TwinLandInfo : GH_AssemblyInfo
   {
-    public override string Name => "TwinLand Info";
+    public override string Name => "TwinLand";
 
     //Return a 24x24 pixel bitmap to represent this GHA library.
     public override Bitmap Icon => null;
@@ -18,9 +18,9 @@ namespace TwinLand
     public override Guid Id => new Guid("B5F86E36-51B9-4E62-9686-7DB4A35CA77A");
 
     //Return a string identifying you or your company.
-    public override string AuthorName => "";
+    public override string AuthorName => "Jiaqi Zheng";
 
     //Return a string representing your preferred contact details.
-    public override string AuthorContact => "";
+    public override string AuthorContact => "jqzzz";
   }
 }

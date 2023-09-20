@@ -45,7 +45,7 @@ namespace TwinLand
     /// </summary>
     public GetRasterTiles()
       : base("GetRasterTiles", "GetRasterTiles",
-        "Get raster tiles from API services", "REST")
+        "Get raster tiles from API services", "Data Collection")
     {
     }
 

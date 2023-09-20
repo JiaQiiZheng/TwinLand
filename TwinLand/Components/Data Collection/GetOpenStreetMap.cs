@@ -13,7 +13,7 @@ using Rhino.Geometry;
 
 namespace TwinLand
 {
-  public class GetOSM : TwinLandComponent
+  public class GetOpenStreetMap : TwinLandComponent
   {
     /// <summary>
     /// Each implementation of GH_Component must provide a public 
@@ -22,8 +22,8 @@ namespace TwinLand
     /// Subcategory the panel. If you use non-existing tab or panel names, 
     /// new tabs/panels will automatically be created.
     /// </summary>
-    public GetOSM()
-      : base("GetOSM", "GetOSM",
+    public GetOpenStreetMap()
+      : base("GetOpenStreetMap", "GetOSM",
         "Get OSM file from OpenStreetMap Overpass API ", "Data Collection")
     {
     }

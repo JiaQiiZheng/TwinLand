@@ -19,7 +19,7 @@ namespace TwinLand
     /// </summary>
     public ConsoleLogger()
       : base("ConsoleLogger", "ConsoleLogger",
-        "ConsoleLogger", "Utility")
+        "ConsoleLogger", "Helper")
     {
     }
 

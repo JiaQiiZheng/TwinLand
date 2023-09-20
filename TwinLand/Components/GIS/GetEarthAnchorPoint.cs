@@ -20,7 +20,7 @@ namespace TwinLand
     /// </summary>
     public GetEarthAnchorPoint()
       : base("GetEarthAnchorPoint", "getEAP",
-        "Get current EarthAnchorPoint of RhinoDoc", "GIS tools")
+        "Get current EarthAnchorPoint of RhinoDoc", "GIS")
     {
     }
 

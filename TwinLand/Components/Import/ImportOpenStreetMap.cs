@@ -17,7 +17,7 @@ using Rhino.Geometry;
 
 namespace TwinLand
 {
-  public class ImportOSM : TwinLandComponent
+  public class ImportOpenStreetMap : TwinLandComponent
   {
     /// <summary>
     /// Each implementation of GH_Component must provide a public 
@@ -26,8 +26,8 @@ namespace TwinLand
     /// Subcategory the panel. If you use non-existing tab or panel names, 
     /// new tabs/panels will automatically be created.
     /// </summary>
-    public ImportOSM()
-      : base("ImportOSM", "ImportOSM",
+    public ImportOpenStreetMap()
+      : base("ImportOpenStreetMap", "ImportOSM",
         "Import OSM data from downloaded osm file", "Import")
     {
     }
@@ -44,7 +44,7 @@ namespace TwinLand
         "List of field name used to filter the osm data, format like natural, buildings, highways",
         GH_ParamAccess.list);
       pManager.AddTextParameter("OSMTag_Key = Value", "OSMTag_Key = Value",
-        "List of field, value used to filter the osm data, format like address:street,main", GH_ParamAccess.list);
+        "List of field, value used to filter the osm data, format like 'natural=water'", GH_ParamAccess.list);
 
       pManager[0].Optional = true;
       pManager[2].Optional = true;

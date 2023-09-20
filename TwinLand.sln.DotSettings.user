@@ -1,10 +1,22 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002FDocuments_002FProjects_002FGrasshopper_0020Development_002FTwinLand_002Fpackages_002FGDAL_002E2_002E4_002E4_002Flib_002Fnet40_002Fgdal_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002FDocuments_002FProjects_002FGrasshopper_0020Development_002FTwinLand_002Fpackages_002FGDAL_002E2_002E4_002E4_002Flib_002Fnet40_002Fgdalconst_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002FDocuments_002FProjects_002FGrasshopper_0020Development_002FTwinLand_002Fpackages_002FGDAL_002E2_002E4_002E4_002Flib_002Fnet40_002Fogr_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002FDocuments_002FProjects_002FGrasshopper_0020Development_002FTwinLand_002Fpackages_002FGDAL_002E2_002E4_002E4_002Flib_002Fnet40_002Fosr_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002F_002Enuget_002Fpackages_002Fgdal_002F2_002E4_002E4_002Flib_002Fnet40_002Fgdal_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002F_002Enuget_002Fpackages_002Fgdal_002F2_002E4_002E4_002Flib_002Fnet40_002Fgdalconst_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002F_002Enuget_002Fpackages_002Fgdal_002F2_002E4_002E4_002Flib_002Fnet40_002Fogr_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002F_002Enuget_002Fpackages_002Fgdal_002F2_002E4_002E4_002Flib_002Fnet40_002Fosr_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	
+	
+	
+	
 	
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
   &lt;Assembly Path="/Users/jiaqizheng/.nuget/packages/rhinocommon/6.32.20340.21001/lib/net45/Eto.dll" /&gt;
   &lt;Assembly Path="/Users/jiaqizheng/.nuget/packages/microsoft.netframework.referenceassemblies.net48/1.0.3/build/.NETFramework/v4.8/System.Windows.Forms.dll" /&gt;
-  &lt;Assembly Path="/Users/jiaqizheng/.nuget/packages/maxrev.gdal.core/3.7.0.217/lib/netstandard2.0/MaxRev.Gdal.Core.dll" /&gt;
-  &lt;Assembly Path="/Users/jiaqizheng/.nuget/packages/gdal/2.4.4/lib/net40/osr_csharp.dll" /&gt;
+  &lt;Assembly Path="/Users/jiaqizheng/.nuget/packages/microsoft.netframework.referenceassemblies.net48/1.0.3/build/.NETFramework/v4.8/System.dll" /&gt;
+  &lt;Assembly Path="/Users/jiaqizheng/.nuget/packages/microsoft.netframework.referenceassemblies.net48/1.0.3/build/.NETFramework/v4.8/System.Core.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/CustomBuildToolPath/@EntryValue">/usr/local/share/dotnet/sdk/7.0.307/MSBuild.dll</s:String>
 	
