@@ -1,0 +1,32 @@
+---
+name: Heron
+version: 0.3.8
+authors:
+- Brian Washburn
+description: >
+  Heron is an add-on which enables the import of GIS data from various sources into the Rhino/Grasshopper environment,  located, scaled and cropped based on an Earth Anchor Point and a clipping polygon. It is an open source project at https://github.com/blueherongis/Heron
+
+
+  - This is the first release of Heron for Mac.  It has all the functionality of the Windows version.
+url: blueheronGIS@gmail.com
+keywords:
+- heron
+- Heron
+- GIS
+- gis
+- topography
+- gdal
+- GDAL
+- ogr
+- OGR
+- OSM
+- Mapbox
+- mapbox
+- satellite
+- slippy
+- cubemap
+- isovist
+- guid:94830583-1656-43fb-8415-6fd290548dd1
+- guid:b64cf7bd-f289-4aab-af65-5b927e11e7fc
+icon_url: https://github.com/blueherongis/Heron/raw/master/Heron/Resources/heron-icon.png
+platform: mac
