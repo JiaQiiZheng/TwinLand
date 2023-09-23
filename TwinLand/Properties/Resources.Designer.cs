@@ -54,6 +54,16 @@ namespace TwinLand.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TL_Engine {
+            get {
+                object obj = ResourceManager.GetObject("TL_Engine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
 
         /// <summary>
         /// Looks up a local resouce of type System.Byte[].

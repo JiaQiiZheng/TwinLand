@@ -1,4 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002FDocuments_002FProjects_002FGrasshopper_0020Development_002FTwinLand_002Fdll_002FFlexCLI_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002FDocuments_002FProjects_002FGrasshopper_0020Development_002FTwinLand_002Fpackages_002FGDAL_002E2_002E4_002E4_002Flib_002Fnet40_002Fgdal_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002FDocuments_002FProjects_002FGrasshopper_0020Development_002FTwinLand_002Fpackages_002FGDAL_002E2_002E4_002E4_002Flib_002Fnet40_002Fgdalconst_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002FDocuments_002FProjects_002FGrasshopper_0020Development_002FTwinLand_002Fpackages_002FGDAL_002E2_002E4_002E4_002Flib_002Fnet40_002Fogr_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
@@ -7,6 +8,11 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002F_002Enuget_002Fpackages_002Fgdal_002F2_002E4_002E4_002Flib_002Fnet40_002Fgdalconst_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002F_002Enuget_002Fpackages_002Fgdal_002F2_002E4_002E4_002Flib_002Fnet40_002Fogr_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fjiaqizheng_002F_002Enuget_002Fpackages_002Fgdal_002F2_002E4_002E4_002Flib_002Fnet40_002Fosr_005Fcsharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=34F417A2_002D55E4_002D408B_002D9983_002D5B578A3C6FDB_002Fd_003AComponents_002Fd_003AFleX_0020Configuration_002Ff_003AFleX_005FColliders_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=34F417A2_002D55E4_002D408B_002D9983_002D5B578A3C6FDB_002Fd_003AComponents_002Fd_003AFleX_0020Configuration_002Ff_003AFleX_005FParameters_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=34F417A2_002D55E4_002D408B_002D9983_002D5B578A3C6FDB_002Fd_003AComponents_002Fd_003AFleX_0020Configuration_002Ff_003AFleX_005FScene_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=34F417A2_002D55E4_002D408B_002D9983_002D5B578A3C6FDB_002Fd_003AComponents_002Fd_003AFleX_0020Construct_002Ff_003AParticlesFromPoints_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=34F417A2_002D55E4_002D408B_002D9983_002D5B578A3C6FDB_002Fd_003AComponents_002Fd_003AFleX_0020Deconstruct_002Ff_003AGetAllParticles_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	
 	
 	
